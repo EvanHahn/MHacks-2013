@@ -163,6 +163,6 @@ Fudo.Friend = Fudo.Model.extend({
 		// Server sync.
 		// TODO
 
-	}, 5000),
+	}, 1000),
 
 });

@@ -87,11 +87,11 @@ Fudo.FriendView = Fudo.View.extend({
 			image: this.images.eyebrowLeftNeutral,
 			x: -75,
 			y: -190,
-			width: 42,
-			height: 16,
+			width: 45,
+			height: 20,
 			offset: {
-				x: 42 / 2,
-				y: 16 / 2,
+				x: 45 / 2,
+				y: 20 / 2,
 			}
 		});
 		this.group.add(this.leftEyebrowSprite);
@@ -99,11 +99,11 @@ Fudo.FriendView = Fudo.View.extend({
 			image: this.images.eyebrowRightNeutral,
 			x: 50,
 			y: -190,
-			width: 42,
-			height: 18,
+			width: 45,
+			height: 20,
 			offset: {
-				x: 42 / 2,
-				y: 18 / 2,
+				x: 45 / 2,
+				y: 20 / 2,
 			}
 		});
 		this.group.add(this.rightEyebrowSprite);

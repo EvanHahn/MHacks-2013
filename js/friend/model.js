@@ -4,9 +4,12 @@ Fudo.Friend = Fudo.Model.extend({
 	 * List the properties that need syncing.
 	 */
 	TO_SYNC: [
+		"isNew",
 		"name",
 		"species",
 		"birthday",
+		"happiness",
+		"tiredness",
 	],
 
 	/*
@@ -22,13 +25,16 @@ Fudo.Friend = Fudo.Model.extend({
 			this.on("change:" + attribute, this.sync, this);
 		}, this);
 
+		// Set up some initial properties.
+		this.set("x", 500);
+		this.set("y", 500);
+
 		// Fetch stuff.
 		this.fetch();
 
-		// Set up some initial properties.
-		this.set("birthday", new Date);
-		this.set("x", 500);
-		this.set("y", 500);
+		// If we're totally new, do the first initialize.
+		if (this.get("isNew"))
+			this.firstInitialize();
 
 		// Build a view.
 		this.set("view", new Fudo.FriendView({ model: this }));
@@ -37,6 +43,16 @@ Fudo.Friend = Fudo.Model.extend({
 		this.on("change:name", this.changeWindowTitle, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 
+	},
+
+	/*
+	 * If we're totally new, this function gets called.
+	 */
+	firstInitialize: function() {
+		this.set("birthday", new Date);
+		this.set("happiness", .5);
+		this.set("tiredness", -1);
+		this.set("isNew", false);
 	},
 
 	/*

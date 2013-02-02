@@ -8,3 +8,4 @@ Fudo loves the following libraries:
 * [Lodash](http://lodash.com/), version 1.0.0-rc.3, MIT License
 * [Backbone.js](http://backbonejs.org/), version 0.9.10, MIT License
 * [Backbone.Mutators](http://asciidisco.github.com/Backbone.Mutators), version 0.3.0, MIT License
+* [stats.js](https://github.com/mrdoob/stats.js), version r11, MIT License

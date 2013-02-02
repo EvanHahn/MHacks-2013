@@ -23,3 +23,13 @@ Fudo.local = {
 		return localStorage.setItem(key, value);
 	},
 };
+
+/*
+ * A better Image object.
+ */
+
+Fudo.Image = function(src) {
+	var result = new Image;
+	result.src = src;
+	return result;
+};

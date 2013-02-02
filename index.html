@@ -16,11 +16,29 @@
 	<script src="js/namespace.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/model.js"></script>
+	<script src="js/view.js"></script>
 	<script src="js/playground/model.js"></script>
 	<script src="js/playground/view.js"></script>
 	<script src="js/friend/model.js"></script>
 	<script src="js/friend/view.js"></script>
 	<script src="js/main.js"></script>
+
+	<script src="vendor/stats.js"></script>
+	<script>
+
+	$(document).ready(function() {
+		var stats = new Stats();
+		stats.setMode(0);
+		stats.domElement.style.position = "absolute";
+		stats.domElement.style.left = stats.domElement.style.bottom = "5px";
+		document.body.appendChild(stats.domElement);
+		setInterval(function() {
+			stats.begin();
+			stats.end();
+		}, 1000 / 60);
+	});
+
+	</script>
 </head>
 <body>
 

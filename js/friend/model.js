@@ -23,6 +23,12 @@ Fudo.Friend = Fudo.Model.extend({
 			this.on("change:" + attribute, this.sync, this);
 		}, this);
 
+		// Set up some initial properties.
+		this.set("coords", [200, 200, 0]);
+
+		// Build a view.
+		this.set("view", new Fudo.FriendView({ model: this }));
+
 		// Respond to things!
 		this.get("playground").on("resize", this.wallsMove, this);
 

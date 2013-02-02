@@ -76,6 +76,6 @@ Tama.Friend = Tama.Model.extend({
 		// Server sync.
 		// TODO
 
-	}, 1000),
+	}, 5000),
 
 });

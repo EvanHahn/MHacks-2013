@@ -29,6 +29,7 @@ Fudo.FriendView = Fudo.View.extend({
 			eyebrowLeftNeutral: Fudo.Image("sprites/ebNeutral_l.png"),
 			eyebrowRightNeutral: Fudo.Image("sprites/ebNeutral_r.png"),
 			eyeBlink: Fudo.Image("sprites/blink.png"),
+			eyeMidBlink: Fudo.Image("sprites/midblink.png"),
 			mouthHappierOpen: Fudo.Image("sprites/mouthHappierOpen.png"),
 			mouthHappyOpen: Fudo.Image("sprites/mouthHappyOpen.png"),
 			mouthHappyClosed: Fudo.Image("sprites/mouthHappyClosed.png"),
@@ -142,8 +143,12 @@ Fudo.FriendView = Fudo.View.extend({
 
 		// Blinking?
 		if (this.model.get("blinking")) {
+			this.leftEyeSprite.setImage(this.images.eyeMidBlink);
+			this.rightEyeSprite.setImage(this.images.eyeMidBlink);
 			this.leftEyeSprite.setImage(this.images.eyeBlink);
 			this.rightEyeSprite.setImage(this.images.eyeBlink);
+			this.leftEyeSprite.setImage(this.images.eyeMidBlink);
+			this.rightEyeSprite.setImage(this.images.eyeMidBlink);
 		} else {
 			this.leftEyeSprite.setImage(this.images.eyeNeutral);
 			this.rightEyeSprite.setImage(this.images.eyeNeutral);

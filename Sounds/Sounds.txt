@@ -1,7 +1,6 @@
 To Do:
 Yawn
 Whistle
-Surprise
 snore
 anger
 
@@ -14,3 +13,4 @@ hop
 fear (shake/rattle)
 devil_laugh
 happy_jingle
+Surprise

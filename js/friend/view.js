@@ -23,6 +23,9 @@ Fudo.FriendView = Fudo.View.extend({
 			eyeNeutral: Fudo.Image("sprites/eye.png"),
 			eyeLeftDilated: Fudo.Image("sprites/eyeDilated_l.png"),
 			eyeRightDilated: Fudo.Image("sprites/eyeDilated_r.png"),
+			eyeLeftX: Fudo.Image("sprites/eyeX_l.png"),
+			eyeRightX: Fudo.Image("sprites/eyeX_r.png"),
+			eyeSparkle: Fudo.Image("sprites/eyeSparkle.png"),
 			eyebrowLeftNeutral: Fudo.Image("sprites/ebNeutral_l.png"),
 			eyebrowRightNeutral: Fudo.Image("sprites/ebNeutral_r.png"),
 			eyeBlink: Fudo.Image("sprites/blink.png"),
@@ -149,6 +152,8 @@ Fudo.FriendView = Fudo.View.extend({
 		// Change the mouth accordingly.
 		if (this.model.get("happiness") >= 1) {
 			this.mouthSprite.setImage(this.images.mouthHappierOpen);
+			this.leftEyeSprite.setImage(this.images.eyeSparkle);
+			this.rightEyeSprite.setImage(this.images.eyeSparkle);
 		} else if (this.model.get("happiness") >= .75) {
 			this.mouthSprite.setImage(this.images.mouthHappyOpen);
 		} else if (this.model.get("happiness") >= .5) {
@@ -161,6 +166,8 @@ Fudo.FriendView = Fudo.View.extend({
 			this.mouthSprite.setImage(this.images.mouthSadOpen);
 		} else {
 			this.mouthSprite.setImage(this.images.mouthSadderOpen);
+			this.leftEyeSprite.setImage(this.images.eyeLeftX);
+			this.rightEyeSprite.setImage(this.images.eyeRightX);
 		}
 
 		// Change size based on age.

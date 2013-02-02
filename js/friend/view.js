@@ -54,10 +54,11 @@ Fudo.FriendView = Fudo.View.extend({
 			});
 			this.group.add(this[name]);
 		}, this);
-		this.leftEyeSprite.setX(-75);
-		this.leftEyeSprite.setY(-160);
-		this.rightEyeSprite.setX(50);
-		this.rightEyeSprite.setY(-160);
+		this.leftEyeCenterX = -75;
+		this.leftEyeCenterY = -160;
+		this.rightEyeCenterX = 50;
+		this.rightEyeCenterY = -160;
+		this.maxEyeMovement = 10;
 
 		// Create the eyebrows.
 		this.leftEyebrowSprite = new Kinetic.Image({
@@ -106,12 +107,24 @@ Fudo.FriendView = Fudo.View.extend({
 	 */
 	render: function() {
 
+		// Shift the eyes.
+		var eyeXMovement = 0;
+		var eyeYMovement = 0;
+		this.leftEyeSprite.setX(this.leftEyeCenterX + eyeXMovement);
+		this.leftEyeSprite.setY(this.leftEyeCenterY + eyeYMovement);
+		this.rightEyeSprite.setX(this.rightEyeCenterX + eyeXMovement);
+		this.rightEyeSprite.setY(this.rightEyeCenterY + eyeYMovement);
+
 		// Change the mouth accordingly.
 		if (this.model.get("happiness") > .5) {
 			this.mouthSprite.setImage(this.images.mouthHappyOpen);
 		} else {
 			this.mouthSprite.setImage(this.images.mouthNeutralClosed);
 		}
+
+		// Change size based on age.
+		var scale = Math.max(Math.min(1, this.model.get("age") / 300000), .5);
+		this.group.setScale(scale, scale);
 
 		// Place the group.
 		this.group.setX(this.model.get("x"));

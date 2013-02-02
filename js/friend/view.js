@@ -21,13 +21,18 @@ Fudo.FriendView = Fudo.View.extend({
 		this.images = {
 			body: Fudo.Image("sprites/body.png"),
 			eyeNeutral: Fudo.Image("sprites/eye.png"),
+			eyeLeftDilated: Fudo.Image("sprites/eyeDilated_l.png"),
+			eyeRightDilated: Fudo.Image("sprites/eyeDilated_r.png"),
 			eyebrowLeftNeutral: Fudo.Image("sprites/ebNeutral_l.png"),
 			eyebrowRightNeutral: Fudo.Image("sprites/ebNeutral_r.png"),
 			eyeBlink: Fudo.Image("sprites/blink.png"),
+			mouthHappierOpen: Fudo.Image("sprites/mouthHappierOpen.png"),
 			mouthHappyOpen: Fudo.Image("sprites/mouthHappyOpen.png"),
-			mouthNeutralClosed: Fudo.Image("sprites/mouthHappyClosed.png"),
-			mouthStraightClosed: Fudo.Image("sprites/mouthNeutral.png"),
-			mouthSadOpen: Fudo.Image("sprites/mouthSadderOpen.png"),
+			mouthHappyClosed: Fudo.Image("sprites/mouthHappyClosed.png"),
+			mouthNeutral: Fudo.Image("sprites/mouthNeutral.png"),
+			mouthSadClosed: Fudo.Image("sprites/mouthSadClosed.png"),
+			mouthSadOpen: Fudo.Image("sprites/mouthSadOpen.png"),
+			mouthSadderOpen: Fudo.Image("sprites/mouthSadderOpen.png"),
 			shadow: Fudo.Image("sprites/shadow.png"),
 		};
 
@@ -142,14 +147,20 @@ Fudo.FriendView = Fudo.View.extend({
 		}
 
 		// Change the mouth accordingly.
-		if (this.model.get("happiness") > .5) {
+		if (this.model.get("happiness") >= 1) {
+			this.mouthSprite.setImage(this.images.mouthHappierOpen);
+		} else if (this.model.get("happiness") >= .75) {
 			this.mouthSprite.setImage(this.images.mouthHappyOpen);
+		} else if (this.model.get("happiness") >= .5) {
+			this.mouthSprite.setImage(this.images.mouthHappyClosed);
 		} else if (this.model.get("happiness") >= 0) {
-			this.mouthSprite.setImage(this.images.mouthNeutralClosed);
-		} else if (this.model.get("happiness") > -.5) {
-			this.mouthSprite.setImage(this.images.mouthStraightClosed);
-		} else {
+			this.mouthSprite.setImage(this.images.mouthNeutral);
+		} else if (this.model.get("happiness") >= -.5) {
+			this.mouthSprite.setImage(this.images.mouthSadClosed);
+		} else if (this.model.get("happiness") >= -.75) {
 			this.mouthSprite.setImage(this.images.mouthSadOpen);
+		} else {
+			this.mouthSprite.setImage(this.images.mouthSadderOpen);
 		}
 
 		// Change size based on age.

@@ -11,7 +11,7 @@ Fudo.FriendView = Fudo.View.extend({
 		// What stage am I going to be drawing on?
 		this.stage = this.model.get("playground").get("stage");
 
-		// Create the layers we'll need.
+		// Create the body layer.
 		this.bodyLayer = new Kinetic.Layer;
 		this.bodyImage = Fudo.Image("sprites/body.png");
 		this.bodyImage.width = 257;
@@ -31,10 +31,13 @@ Fudo.FriendView = Fudo.View.extend({
 	 * Render the friend view.
 	 */
 	render: function() {
-		this.bodySprite.setX(Math.random() * 500);
-		this.bodySprite.setY(Math.random() * 500);
+
+		// Draw the body.
+		this.bodySprite.setX(this.model.get("x"));
+		this.bodySprite.setY(this.model.get("y"));
 		this.bodySprite.setZIndex(0);
 		this.bodyLayer.draw();
+
 	},
 
 });

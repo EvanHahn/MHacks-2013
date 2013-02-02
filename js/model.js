@@ -31,6 +31,25 @@ Fudo.Model = Backbone.Model.extend({
 	},
 
 	/*
+	 * Shorthand mutators.
+	 */
+	_setCoord: function(index, value, options) {
+		var newCoords = _.clone(this.get("coords"));
+		newCoords[index] = value;
+		return this.set("coords", newCoords, options);
+	},
+	mutators: {
+		x: {
+			get: function() { return this.coords[0]; },
+			set: function(key, value, options, set) { return this._setCoord(0, value, options); },
+		},
+		y: {
+			get: function() { return this.coords[1]; },
+			set: function(key, value, options, set) { return this._setCoord(1, value, options); },
+		},
+	},
+
+	/*
 	 * Do physics calculations.
 	 */
 	doPhysics: function() {

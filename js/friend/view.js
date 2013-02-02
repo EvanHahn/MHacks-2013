@@ -126,9 +126,6 @@ Fudo.FriendView = Fudo.View.extend({
 		});
 		this.group.add(this.mouthSprite);
 
-		// Sounds
-		Fudo.playAudio("sounds/happy_jingle.ogg");
-
 	},
 
 	/*

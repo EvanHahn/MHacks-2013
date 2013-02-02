@@ -112,9 +112,9 @@ Fudo.FriendView = Fudo.View.extend({
 		// Shift the eyes.
 		var eyeXMovement = 0;
 		var eyeYMovement = 0;
-		this.leftEyeSprite.setX(this.leftEyeCenterX + eyeXMovement);
+		this.leftEyeSprite.setX(this.leftEyeCenterX - eyeXMovement);
 		this.leftEyeSprite.setY(this.leftEyeCenterY + eyeYMovement);
-		this.rightEyeSprite.setX(this.rightEyeCenterX + eyeXMovement);
+		this.rightEyeSprite.setX(this.rightEyeCenterX - eyeXMovement);
 		this.rightEyeSprite.setY(this.rightEyeCenterY + eyeYMovement);
 
 		// Change the mouth accordingly.

@@ -17,10 +17,19 @@ Fudo.FriendView = Fudo.View.extend({
 		});
 		this.layer.add(this.group);
 
+		// Define all the images.
+		this.images = {
+			body: Fudo.Image("sprites/body.png"),
+			eyeNeutral: Fudo.Image("sprites/eye.png"),
+			eyebrowLeftNeutral: Fudo.Image("sprites/eyebr_l.png"),
+			eyebrowRightNeutral: Fudo.Image("sprites/eyebr_r.png"),
+			mouthHappyOpen: Fudo.Image("sprites/mouth.png"),
+		};
+
 		// Create the body sprite.
 		this.bodySprite = new Kinetic.Image({
 			x: 0, y: 0,
-			image: Fudo.Image("sprites/body.png"),
+			image: this.images.body,
 			width: 257,
 			height: 307,
 			offset: {
@@ -34,7 +43,7 @@ Fudo.FriendView = Fudo.View.extend({
 		_(["leftEyeSprite", "rightEyeSprite"]).each(function(name) {
 			this[name] = new Kinetic.Image({
 				x: -1, y: -1,
-				image: Fudo.Image("sprites/eye.png"),
+				image: this.images.eyeNeutral,
 				width: 31,
 				height: 33,
 				offset: {
@@ -51,7 +60,7 @@ Fudo.FriendView = Fudo.View.extend({
 
 		// Create the eyebrows.
 		this.leftEyebrowSprite = new Kinetic.Image({
-			image: Fudo.Image("sprites/eyebr_l.png"),
+			image: this.images.eyebrowLeftNeutral,
 			x: -75,
 			y: -190,
 			width: 42,
@@ -62,8 +71,8 @@ Fudo.FriendView = Fudo.View.extend({
 			}
 		});
 		this.group.add(this.leftEyebrowSprite);
-		this.leftEyebrowSprite = new Kinetic.Image({
-			image: Fudo.Image("sprites/eyebr_r.png"),
+		this.rightEyebrowSprite = new Kinetic.Image({
+			image: this.images.eyebrowRightNeutral,
 			x: 50,
 			y: -190,
 			width: 42,
@@ -73,7 +82,21 @@ Fudo.FriendView = Fudo.View.extend({
 				y: 18 / 2,
 			}
 		});
-		this.group.add(this.leftEyebrowSprite);
+		this.group.add(this.rightEyebrowSprite);
+
+		// Create the mouth.
+		this.mouthSprite = new Kinetic.Image({
+			image: this.images.mouthHappyOpen,
+			x: -5,
+			y: -125,
+			width: 45,
+			height: 30,
+			offset: {
+				x: 45 / 2,
+				y: 18 / 2
+			}
+		});
+		this.group.add(this.mouthSprite);
 
 	},
 

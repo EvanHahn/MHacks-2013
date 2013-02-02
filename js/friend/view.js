@@ -12,10 +12,14 @@ Fudo.FriendView = Fudo.View.extend({
 		this.stage = this.model.get("playground").get("stage");
 		this.layer = new Kinetic.Layer;
 		this.stage.add(this.layer);
+		this.group = new Kinetic.Group({
+			x: -1, y: -1, rotation: 0
+		});
+		this.layer.add(this.group);
 
 		// Create the body sprite.
 		this.bodySprite = new Kinetic.Image({
-			x: -1, y: -1,
+			x: 0, y: 0,
 			image: Fudo.Image("sprites/body.png"),
 			width: 257,
 			height: 307,
@@ -24,7 +28,7 @@ Fudo.FriendView = Fudo.View.extend({
 				y: 300
 			}
 		});
-		this.layer.add(this.bodySprite);
+		this.group.add(this.bodySprite);
 
 		// Create the eyes.
 		_(["leftEyeSprite", "rightEyeSprite"]).each(function(name) {
@@ -38,8 +42,12 @@ Fudo.FriendView = Fudo.View.extend({
 					y: 33 / 2
 				}
 			});
-			this.layer.add(this[name]);
+			this.group.add(this[name]);
 		}, this);
+		this.leftEyeSprite.setX(-75);
+		this.leftEyeSprite.setY(-160);
+		this.rightEyeSprite.setX(50);
+		this.rightEyeSprite.setY(-160);
 
 	},
 
@@ -48,18 +56,10 @@ Fudo.FriendView = Fudo.View.extend({
 	 */
 	render: function() {
 
-		// Draw the body.
-		this.bodySprite.setX(this.model.get("x"));
-		this.bodySprite.setY(this.model.get("y"));
-		this.bodySprite.setZIndex(0);
-
-		// Draw the eyes.
-		this.leftEyeSprite.setX(this.model.get("x") - 75);
-		this.leftEyeSprite.setY(this.model.get("y") - 160);
-		this.leftEyeSprite.setZIndex(-1);
-		this.rightEyeSprite.setX(this.model.get("x") + 50);
-		this.rightEyeSprite.setY(this.model.get("y") - 160);
-		this.rightEyeSprite.setZIndex(-1);
+		// Place the group.
+		this.group.setX(this.model.get("x"));
+		this.group.setY(this.model.get("y"));
+		this.group.setRotation(this.model.get("angle"));
 
 		// Draw!
 		this.layer.draw();

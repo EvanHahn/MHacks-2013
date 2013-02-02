@@ -34,7 +34,7 @@ Fudo.Playground = Backbone.Model.extend({
 
 		// What is the min and max of the colors?
 		var minColor = new RGBColor("#112");
-		var maxColor = new RGBColor("#ffe");
+		var maxColor = new RGBColor("#eef");
 
 		// What should our multiplier be?
 		var now = moment();

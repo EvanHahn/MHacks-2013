@@ -53,7 +53,7 @@ Fudo.Friend = Fudo.Model.extend({
 	 * If we're totally new, this function gets called.
 	 */
 	firstInitialize: function() {
-		this.set("birthday", new Date);
+		this.set("birthday", Date.now());
 		this.set("happiness", .5);
 		this.set("tiredness", -1);
 		this.set("surprise", 0.1);
@@ -66,7 +66,7 @@ Fudo.Friend = Fudo.Model.extend({
 	 */
 	mutators: {
 		age: function() {
-			return (new Date) - this.get("birthday");
+			return Date.now() - this.birthday;
 		},
 	},
 

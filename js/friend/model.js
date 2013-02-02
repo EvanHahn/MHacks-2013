@@ -12,6 +12,7 @@ Fudo.Friend = Fudo.Model.extend({
 		"tiredness",
 		"surprise",
 		"fear",
+		"boredom",
 	],
 
 	/*
@@ -28,8 +29,7 @@ Fudo.Friend = Fudo.Model.extend({
 		}, this);
 
 		// Set up some initial properties.
-		this.set("x", $(window).width() / 2);
-		this.set("y", ($(window).height() / 2) + 100);
+		this.set("coords", [this.get("centerX"), -500, 0]);
 		this.set("eyeDirection", 0);
 		this.set("state", "idle");
 
@@ -58,6 +58,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.set("happiness", .5);
 		this.set("tiredness", -1);
 		this.set("surprise", 0.1);
+		this.set("boredom", -0.5);
 		this.set("fear", -1);
 		this.set("isNew", false);
 	},
@@ -69,6 +70,12 @@ Fudo.Friend = Fudo.Model.extend({
 		age: function() {
 			return Date.now() - this.birthday;
 		},
+		centerX: function() {
+			return ($(window).width() / 2);
+		},
+		centerY: function() {
+			return ($(window).height() / 2) + 100;
+		},
 	},
 
 	/*
@@ -78,12 +85,27 @@ Fudo.Friend = Fudo.Model.extend({
 
 		var now = Date.now();
 
+		// Should I be falling?
+		if (this.get("coords")[1] < this.get("centerY")) {
+			this.set("acceleration", [0, .01, 0]);
+		} else {
+			this.set("acceleration", [0, 0, 0]);
+			this.set("velocity", [0, 0, 0]);
+		}
+
 		// Idle state.
 		if (this.get("state") == "idle") {
 
 			// Wobble!
 			if (this.get("fear") < .5) {
-				this.set("angle", Math.sin(now / 500) / 25);
+				if (this.get("boredom") > .5) {
+					this.set("angle", Math.sin(now / 800) / 3);
+				} else if (this.get("boredom") < -.5) {
+					if (Math.floor(Date.now() / 100) % 10)
+						this.hop(1);
+				} else {
+					this.set("angle", Math.sin(now / 500) / 25);
+				}
 			} else {
 				this.set("angle", 0);
 			}
@@ -112,11 +134,30 @@ Fudo.Friend = Fudo.Model.extend({
 	},
 
 	/*
+	 * Move to the center.
+	 */
+	moveToCenter: function() {
+		this.set("coords", [
+			$(window).width() / 2,
+			($(window).height() / 2) + 100,
+			0
+		]);
+	},
+
+	/*
 	 * Woah! The walls moved!
 	 */
 	wallsMove: function() {
-		this.set("x", $(window).width() / 2);
-		this.set("y", ($(window).height() / 2) + 100);
+		this.moveToCenter();
+	},
+
+	/*
+	 * Hop!
+	 */
+	hop: function(amount) {
+		if (this.get("coords")[1] >= this.get("centerY")) {
+			this.set("velocity", [0, amount * -1, 0])
+		}
 	},
 
 	/*

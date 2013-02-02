@@ -31,25 +31,6 @@ Fudo.Model = Backbone.Model.extend({
 	},
 
 	/*
-	 * Shorthand mutators.
-	 */
-	_setCoord: function(index, value, options) {
-		var newCoords = _.clone(this.get("coords"));
-		newCoords[index] = value;
-		return this.set("coords", newCoords, options);
-	},
-	mutators: {
-		x: {
-			get: function() { return this.coords[0]; },
-			set: function(key, value, options, set) { return this._setCoord(0, value, options); },
-		},
-		y: {
-			get: function() { return this.coords[1]; },
-			set: function(key, value, options, set) { return this._setCoord(1, value, options); },
-		},
-	},
-
-	/*
 	 * Overridable onframe.
 	 */
 	onFrame: Fudo.noop,
@@ -66,7 +47,7 @@ Fudo.Model = Backbone.Model.extend({
 		this.set({
 			angularVelocity: this.get("angularVelocity") + this.get("angularAcceleration") * delta,
 			velocity: _(this.get("acceleration")).map(function(a, i) {
-				return this.get("velocity")[i] + a * delta;
+				return this.get("velocity")[i] + (a * delta);
 			}, this),
 		});
 
@@ -74,7 +55,7 @@ Fudo.Model = Backbone.Model.extend({
 		this.set({
 			angle: this.get("angle") + this.get("angularVelocity") * delta,
 			coords: _(this.get("velocity")).map(function(v, i) {
-				return this.get("coords")[i] + v * delta;
+				return this.get("coords")[i] + (v * delta);
 			}, this),
 		});
 

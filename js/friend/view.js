@@ -42,7 +42,7 @@ Fudo.FriendView = Fudo.View.extend({
 
 		// Create the shadow sprite.
 		this.shadowSprite = new Kinetic.Image({
-			x: 0, y: 0,
+			x: -1, y: -1,
 			image: this.images.shadow,
 			width: 175,
 			height: 36,
@@ -51,7 +51,9 @@ Fudo.FriendView = Fudo.View.extend({
 				y: 36 / 2
 			}
 		});
-		this.group.add(this.shadowSprite);
+		// TODO: re-enable shadow
+		// this.layer.add(this.shadowSprite);
+		// this.shadowSprite.setZIndex(-5);
 
 		// Create the body sprite.
 		this.bodySprite = new Kinetic.Image({
@@ -213,9 +215,13 @@ Fudo.FriendView = Fudo.View.extend({
 		var scale = Math.max(Math.min(1, this.model.get("age") / 300000), .5);
 		this.group.setScale(scale, scale);
 
+		// Move the shadow.
+		this.shadowSprite.setX(this.model.get("centerX"));
+		this.shadowSprite.setY(this.model.get("centerY"));
+
 		// Place the group, and unrotate the shadow.
-		this.group.setX(this.model.get("x") - xShift);
-		this.group.setY(this.model.get("y") + yShift);
+		this.group.setX(this.model.get("coords")[0] - xShift);
+		this.group.setY(this.model.get("coords")[1] + yShift);
 		this.group.setRotation(this.model.get("angle") + angleShift);
 		this.shadowSprite.setRotation(-this.model.get("angle"));
 

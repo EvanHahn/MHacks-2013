@@ -5,8 +5,6 @@ Fudo.Friend = Fudo.Model.extend({
 	 */
 	TO_SYNC: [
 		"name",
-		"username",
-		"passwordHash",
 		"species",
 	],
 
@@ -22,6 +20,9 @@ Fudo.Friend = Fudo.Model.extend({
 		_(this.TO_SYNC).each(function(attribute) {
 			this.on("change:" + attribute, this.sync, this);
 		}, this);
+
+		// Fetch stuff.
+		this.fetch();
 
 		// Set up some initial properties.
 		this.set("coords", [200, 200, 0]);
@@ -54,7 +55,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.set("fetched", true);
 
 		// Fetch from local storage.
-		var localJSON = Fudo.local.get(username + "-friend");
+		var localJSON = Fudo.local.get("friend");
 		if (localJSON) {
 			this.set(JSON.parse(localJSON));
 			console.log("Fetched friend from local storage.");
@@ -71,12 +72,16 @@ Fudo.Friend = Fudo.Model.extend({
 	 */
 	sync: _.debounce(function() {
 
-		// Local storage sync.
+		// What to save?
 		var toSave = {};
 		_(this.TO_SYNC).each(function(attribute) {
 			toSave[attribute] = this.get(attribute);
 		}, this);
-		Fudo.local.set(username + "-friend");
+		toSave.updatedAt = new Date;
+		var saveString = JSON.stringify(toSave);
+
+		// Local storage sync.
+		Fudo.local.set("friend", saveString);
 		console.log("Saved friend to local storage.");
 
 		// Server sync.

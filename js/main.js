@@ -17,6 +17,12 @@
 		var playground = new Fudo.Playground();
 
 		// Make a friend.
+		var localFriend = Fudo.local.get("friend");
+		if (localFriend == null) {
+			var name = prompt("What's your fudo's name?");
+			var localSave = { name: name };
+			Fudo.local.set("friend", JSON.stringify(localSave));
+		}
 		window.friend = new Fudo.Friend({ playground: playground });
 
 	});

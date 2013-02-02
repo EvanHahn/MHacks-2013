@@ -13,3 +13,4 @@ confusion
 hop
 fear (shake/rattle)
 devil_laugh
+happy_jingle

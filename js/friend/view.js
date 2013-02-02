@@ -23,8 +23,10 @@ Fudo.FriendView = Fudo.View.extend({
 			eyeNeutral: Fudo.Image("sprites/eye.png"),
 			eyebrowLeftNeutral: Fudo.Image("sprites/eyebr_l.png"),
 			eyebrowRightNeutral: Fudo.Image("sprites/eyebr_r.png"),
-			mouthHappyOpen: Fudo.Image("sprites/mouth.png"),
-			mouthNeutralClosed: Fudo.Image("sprites/mouth_0.png"),
+			mouthHappyOpen: Fudo.Image("sprites/happyopen.png"),
+			mouthNeutralClosed: Fudo.Image("sprites/happyclosed.png"),
+			mouthStraightClosed: Fudo.Image("sprites/straightmouth.png"),
+			mouthSadOpen: Fudo.Image("sprites/sadopen.png"),
 		};
 
 		// Create the body sprite.

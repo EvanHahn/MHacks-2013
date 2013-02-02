@@ -28,8 +28,9 @@ Fudo.Friend = Fudo.Model.extend({
 		}, this);
 
 		// Set up some initial properties.
-		this.set("x", 500);
-		this.set("y", 500);
+		this.set("x", $(window).width() / 2);
+		this.set("y", ($(window).height() / 2) + 100);
+		this.set("eyeDirection", 0);
 		this.set("state", "idle");
 
 		// Fetch stuff.
@@ -95,7 +96,8 @@ Fudo.Friend = Fudo.Model.extend({
 	 * Woah! The walls moved!
 	 */
 	wallsMove: function() {
-		console.log("Woah! The walls moved!");
+		this.set("x", $(window).width() / 2);
+		this.set("y", ($(window).height() / 2) + 100);
 	},
 
 	/*

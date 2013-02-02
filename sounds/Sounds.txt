@@ -9,8 +9,10 @@ sigh
 Poke
 confusion
 hop
-fear (shake/rattle)
+fear_rattle
 devil_laugh
 happy_jingle
 Surprise
 waaaaa
+devil_wings
+angel_wings

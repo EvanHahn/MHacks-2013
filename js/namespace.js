@@ -1,3 +1,3 @@
-window.Tama = {};
+window.Fudo = {};
 
-Tama.VERSION = 0;
+Fudo.VERSION = 0;

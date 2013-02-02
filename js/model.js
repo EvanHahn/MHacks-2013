@@ -1,4 +1,4 @@
-Tama.Model = Backbone.Model.extend({
+Fudo.Model = Backbone.Model.extend({
 
 	/*
 	 * Constructor.
@@ -7,11 +7,11 @@ Tama.Model = Backbone.Model.extend({
 
 		// We must be initialized with a playground.
 		this.set("playground", attributes.playground);
-		Tama.assert(this.get("playground"), "Entity must have a playground.");
+		Fudo.assert(this.get("playground"), "Entity must have a playground.");
 		this.get("playground").get("models").add(this);
 
 		// Give me a dummy view.
-		this.set("view", { render: Tama.noop });
+		this.set("view", { render: Fudo.noop });
 
 		// Set up some physics stuff.
 		// These are per MILLISECOND.

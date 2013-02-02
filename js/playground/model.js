@@ -1,4 +1,4 @@
-Tama.Playground = Backbone.Model.extend({
+Fudo.Playground = Backbone.Model.extend({
 
 	/*
 	 * Constructor.
@@ -30,7 +30,7 @@ Tama.Playground = Backbone.Model.extend({
 	 */
 	frame: function() {
 		this.get("models").each(function(model) {
-			Tama.assert(model instanceof Tama.Model, "Playground contains a non-model object in the models list.");
+			Fudo.assert(model instanceof Fudo.Model, "Playground contains a non-model object in the models list.");
 			model.doPhysics();
 			model.get("view").render();
 		});

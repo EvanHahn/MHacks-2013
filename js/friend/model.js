@@ -1,4 +1,4 @@
-Tama.Friend = Tama.Model.extend({
+Fudo.Friend = Fudo.Model.extend({
 
 	/*
 	 * List the properties that need syncing.
@@ -16,7 +16,7 @@ Tama.Friend = Tama.Model.extend({
 	initialize: function() {
 
 		// Call super.
-		Tama.Model.prototype.initialize.apply(this, arguments);
+		Fudo.Model.prototype.initialize.apply(this, arguments);
 
 		// Make sure that we sync whatever we should sync.
 		_(this.TO_SYNC).each(function(attribute) {
@@ -48,7 +48,7 @@ Tama.Friend = Tama.Model.extend({
 		this.set("fetched", true);
 
 		// Fetch from local storage.
-		var localJSON = Tama.local.get(username + "-friend");
+		var localJSON = Fudo.local.get(username + "-friend");
 		if (localJSON) {
 			this.set(JSON.parse(localJSON));
 			console.log("Fetched friend from local storage.");
@@ -70,7 +70,7 @@ Tama.Friend = Tama.Model.extend({
 		_(this.TO_SYNC).each(function(attribute) {
 			toSave[attribute] = this.get(attribute);
 		}, this);
-		Tama.local.set(username + "-friend");
+		Fudo.local.set(username + "-friend");
 		console.log("Saved friend to local storage.");
 
 		// Server sync.

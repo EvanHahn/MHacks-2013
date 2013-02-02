@@ -14,10 +14,10 @@
 		document.body.id = "body";
 
 		// Make a playground.
-		var playground = new Tama.Playground();
+		var playground = new Fudo.Playground();
 
 		// Make a friend.
-		window.friend = new Tama.Friend({ playground: playground });
+		window.friend = new Fudo.Friend({ playground: playground });
 
 	});
 

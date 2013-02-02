@@ -1,7 +1,7 @@
 /*
  * Throw an error if an assertion is false.
  */
-Tama.assert = function(bool, errorMessage) {
+Fudo.assert = function(bool, errorMessage) {
 	if (!bool)
 		throw new Error(errorMessage);
 };
@@ -9,13 +9,13 @@ Tama.assert = function(bool, errorMessage) {
 /*
  * Simple noop.
  */
-Tama.noop = function() {};
+Fudo.noop = function() {};
 
 /*
  * Local storage aliases.
  */
 
-Tama.local = {
+Fudo.local = {
 	get: function(key) {
 		return localStorage.getItem(key);
 	},

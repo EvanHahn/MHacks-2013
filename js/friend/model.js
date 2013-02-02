@@ -48,7 +48,7 @@ Tama.Friend = Tama.Model.extend({
 		this.set("fetched", true);
 
 		// Fetch from local storage.
-		var localJSON = localStorage.getItem(username + "-friend");
+		var localJSON = Tama.local.get(username + "-friend");
 		if (localJSON) {
 			this.set(JSON.parse(localJSON));
 			console.log("Fetched friend from local storage.");
@@ -70,7 +70,7 @@ Tama.Friend = Tama.Model.extend({
 		_(this.TO_SYNC).each(function(attribute) {
 			toSave[attribute] = this.get(attribute);
 		}, this);
-		localStorage.setItem(username + "-friend");
+		Tama.local.set(username + "-friend");
 		console.log("Saved friend to local storage.");
 
 		// Server sync.

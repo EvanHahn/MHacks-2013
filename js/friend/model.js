@@ -6,6 +6,7 @@ Fudo.Friend = Fudo.Model.extend({
 	TO_SYNC: [
 		"name",
 		"species",
+		"birthday",
 	],
 
 	/*
@@ -25,7 +26,9 @@ Fudo.Friend = Fudo.Model.extend({
 		this.fetch();
 
 		// Set up some initial properties.
-		this.set("coords", [200, 200, 0]);
+		this.set("birthday", new Date);
+		this.set("x", 500);
+		this.set("y", 500);
 
 		// Build a view.
 		this.set("view", new Fudo.FriendView({ model: this }));
@@ -34,6 +37,15 @@ Fudo.Friend = Fudo.Model.extend({
 		this.on("change:name", this.changeWindowTitle, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 
+	},
+
+	/*
+	 * Some accessors.
+	 */
+	mutators: {
+		age: function() {
+			return (new Date) - this.get("birthday");
+		},
 	},
 
 	/*

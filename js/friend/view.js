@@ -18,6 +18,10 @@ Fudo.FriendView = Fudo.View.extend({
 			image: Fudo.Image("sprites/body.png"),
 			width: 257,
 			height: 307,
+			offset: {
+				x: 257 / 2,
+				y: 300
+			}
 		});
 		this.bodyLayer.add(this.bodySprite);
 		this.stage.add(this.bodyLayer);

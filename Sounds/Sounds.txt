@@ -3,7 +3,11 @@ Yawn
 Whistle
 Surprise
 snore
+fear (shake/rattle)
+anger
+
 
 Finished?:
 sigh
 Poke
+confusion

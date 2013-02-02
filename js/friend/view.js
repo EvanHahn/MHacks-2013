@@ -136,6 +136,16 @@ Fudo.FriendView = Fudo.View.extend({
 	 */
 	render: function() {
 
+		// Add some variables for shifting.
+		var xShift = 0;
+		var yShift = 0;
+		var angleShift = 0;
+
+		// Reset everything.
+		_([this.leftEyebrowSprite, this.rightEyebrowSprite]).each(function(sprite) {
+			sprite.setRotation(0);
+		});
+
 		// Shift the eyes.
 		var eyeXMovement = 0;
 		var eyeYMovement = 0;
@@ -178,14 +188,35 @@ Fudo.FriendView = Fudo.View.extend({
 			this.rightEyeSprite.setImage(this.images.eyeRightX);
 		}
 
+		// Afraid?
+		if (this.model.get("fear") > .9) {
+			this.mouthSprite.setImage(this.images.mouthSadderOpen);
+			this.leftEyeSprite.setImage(this.images.eyeSparkle);
+			this.rightEyeSprite.setImage(this.images.eyeSparkle);
+			this.leftEyebrowSprite.setRotation(-.5);
+			this.rightEyebrowSprite.setRotation(.5);
+		}
+		else if (this.model.get("fear") > .6) {
+			this.mouthSprite.setImage(this.images.mouthSadClosed);
+			this.leftEyebrowSprite.setRotation(-.25);
+			this.rightEyebrowSprite.setRotation(.25);
+		}
+		else if (this.model.get("fear") > .3) {
+			this.mouthSprite.setImage(this.images.mouthNeutral);
+		}
+		if (this.model.get("fear") > 0) {
+			var fearShift = Math.random() * this.model.get("fear") * 5;
+			xShift += fearShift;
+		}
+
 		// Change size based on age.
 		var scale = Math.max(Math.min(1, this.model.get("age") / 300000), .5);
 		this.group.setScale(scale, scale);
 
 		// Place the group, and unrotate the shadow.
-		this.group.setX(this.model.get("x"));
-		this.group.setY(this.model.get("y"));
-		this.group.setRotation(this.model.get("angle"));
+		this.group.setX(this.model.get("x") - xShift);
+		this.group.setY(this.model.get("y") + yShift);
+		this.group.setRotation(this.model.get("angle") + angleShift);
 		this.shadowSprite.setRotation(-this.model.get("angle"));
 
 		// Draw!

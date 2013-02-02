@@ -81,7 +81,11 @@ Fudo.Friend = Fudo.Model.extend({
 		if (this.get("state") == "idle") {
 
 			// Wobble!
-			this.set("angle", Math.sin(now / 500) / 25);
+			if (this.get("fear") < .5) {
+				this.set("angle", Math.sin(now / 500) / 25);
+			} else {
+				this.set("angle", 0);
+			}
 
 			// Should I be blinking?
 			if ((now % 4000) < 50) {

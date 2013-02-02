@@ -44,6 +44,16 @@ Fudo.Friend = Fudo.Model.extend({
 		this.on("change:name", this.changeWindowTitle, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 
+		// Wiggle wiggle wiggle wiggle wiggle, yeah!
+		this.set("angularAcceleration", -.0000001);
+		var self = this;
+		setInterval(function() {
+			self.set("angularAcceleration", self.get("angularAcceleration") * -1);
+		}, 1000);
+		setInterval(function() {
+			self.set("angularAcceleration", self.get("angularAcceleration") * -1);
+		}, 2000);
+
 	},
 
 	/*

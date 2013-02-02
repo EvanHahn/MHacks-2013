@@ -1,0 +1,19 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+}
+
+.unsupported body {
+	padding: 1em;
+	font-family: sans-serif;
+	font-size: 30px;
+	text-align: center;
+}
+
+.kineticjs-content {
+	position: absolute !important;
+}

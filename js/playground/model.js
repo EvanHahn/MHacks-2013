@@ -29,12 +29,16 @@ Fudo.Playground = Backbone.Model.extend({
 	 * This is the "game loop".
 	 */
 	frame: function() {
+
+		// Do the every-frame stuff for each model inside.
 		this.get("models").each(function(model) {
-			Fudo.assert(model instanceof Fudo.Model, "Playground contains a non-model object in the models list.");
 			model.doPhysics();
 			model.get("view").render();
 		});
+
+		// Go again!
 		requestAnimationFrame(this.frame);
+
 	},
 
 	/*

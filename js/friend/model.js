@@ -13,6 +13,7 @@ Fudo.Friend = Fudo.Model.extend({
 		"surprise",
 		"fear",
 		"boredom",
+		"evil",
 	],
 
 	/*

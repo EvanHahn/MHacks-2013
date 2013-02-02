@@ -75,11 +75,25 @@ Fudo.Friend = Fudo.Model.extend({
 	 */
 	onFrame: function() {
 
+		var now = Date.now();
+
 		// Idle state.
 		if (this.get("state") == "idle") {
 
 			// Wobble!
-			this.set("angle", Math.sin(Date.now() / 500) / 25);
+			this.set("angle", Math.sin(now / 500) / 25);
+
+			// Should I be blinking?
+			if ((now % 4000) < 50) {
+				this.set("blinking", true);
+				var self = this;
+				setTimeout(function() {
+					self.set("blinking", false);
+				}, 1000);
+			}
+			else {
+				this.set("blinking", false);
+			}
 
 		}
 

@@ -23,11 +23,26 @@ Fudo.FriendView = Fudo.View.extend({
 			eyeNeutral: Fudo.Image("sprites/eye.png"),
 			eyebrowLeftNeutral: Fudo.Image("sprites/eyebr_l.png"),
 			eyebrowRightNeutral: Fudo.Image("sprites/eyebr_r.png"),
+			eyeBlink: Fudo.Image("sprites/blink.png"),
 			mouthHappyOpen: Fudo.Image("sprites/happyopen.png"),
 			mouthNeutralClosed: Fudo.Image("sprites/happyclosed.png"),
 			mouthStraightClosed: Fudo.Image("sprites/straightmouth.png"),
 			mouthSadOpen: Fudo.Image("sprites/sadopen.png"),
+			shadow: Fudo.Image("sprites/shadow.png"),
 		};
+
+		// Create the shadow sprite.
+		this.shadowSprite = new Kinetic.Image({
+			x: 0, y: 0,
+			image: this.images.shadow,
+			width: 175,
+			height: 36,
+			offset: {
+				x: 175 / 2,
+				y: 36 / 2
+			}
+		});
+		this.group.add(this.shadowSprite);
 
 		// Create the body sprite.
 		this.bodySprite = new Kinetic.Image({
@@ -117,6 +132,15 @@ Fudo.FriendView = Fudo.View.extend({
 		this.rightEyeSprite.setX(this.rightEyeCenterX - eyeXMovement);
 		this.rightEyeSprite.setY(this.rightEyeCenterY + eyeYMovement);
 
+		// Blinking?
+		if (this.model.get("blinking")) {
+			this.leftEyeSprite.setImage(this.images.eyeBlink);
+			this.rightEyeSprite.setImage(this.images.eyeBlink);
+		} else {
+			this.leftEyeSprite.setImage(this.images.eyeNeutral);
+			this.rightEyeSprite.setImage(this.images.eyeNeutral);
+		}
+
 		// Change the mouth accordingly.
 		if (this.model.get("happiness") > .5) {
 			this.mouthSprite.setImage(this.images.mouthHappyOpen);
@@ -132,10 +156,11 @@ Fudo.FriendView = Fudo.View.extend({
 		var scale = Math.max(Math.min(1, this.model.get("age") / 300000), .5);
 		this.group.setScale(scale, scale);
 
-		// Place the group.
+		// Place the group, and unrotate the shadow.
 		this.group.setX(this.model.get("x"));
 		this.group.setY(this.model.get("y"));
 		this.group.setRotation(this.model.get("angle"));
+		this.shadowSprite.setRotation(-this.model.get("angle"));
 
 		// Draw!
 		this.layer.draw();

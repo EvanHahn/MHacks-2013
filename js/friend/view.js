@@ -21,13 +21,13 @@ Fudo.FriendView = Fudo.View.extend({
 		this.images = {
 			body: Fudo.Image("sprites/body.png"),
 			eyeNeutral: Fudo.Image("sprites/eye.png"),
-			eyebrowLeftNeutral: Fudo.Image("sprites/eyebr_l.png"),
-			eyebrowRightNeutral: Fudo.Image("sprites/eyebr_r.png"),
+			eyebrowLeftNeutral: Fudo.Image("sprites/ebNeutral_l.png"),
+			eyebrowRightNeutral: Fudo.Image("sprites/ebNeutral_r.png"),
 			eyeBlink: Fudo.Image("sprites/blink.png"),
-			mouthHappyOpen: Fudo.Image("sprites/happyopen.png"),
-			mouthNeutralClosed: Fudo.Image("sprites/happyclosed.png"),
-			mouthStraightClosed: Fudo.Image("sprites/straightmouth.png"),
-			mouthSadOpen: Fudo.Image("sprites/sadopen.png"),
+			mouthHappyOpen: Fudo.Image("sprites/mouthHappyOpen.png"),
+			mouthNeutralClosed: Fudo.Image("sprites/mouthHappyClosed.png"),
+			mouthStraightClosed: Fudo.Image("sprites/mouthNeutral.png"),
+			mouthSadOpen: Fudo.Image("sprites/mouthSadderOpen.png"),
 			shadow: Fudo.Image("sprites/shadow.png"),
 		};
 

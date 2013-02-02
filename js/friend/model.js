@@ -10,6 +10,7 @@ Fudo.Friend = Fudo.Model.extend({
 		"birthday",
 		"happiness",
 		"tiredness",
+		"surprise",
 	],
 
 	/*
@@ -52,6 +53,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.set("birthday", new Date);
 		this.set("happiness", .5);
 		this.set("tiredness", -1);
+		this.set("surprise", 0.1);
 		this.set("isNew", false);
 	},
 

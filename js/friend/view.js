@@ -128,6 +128,11 @@ Fudo.FriendView = Fudo.View.extend({
 		});
 		this.group.add(this.mouthSprite);
 
+		// Bind some events to some sounds.
+		this.model.on("hop", function() {
+			Fudo.playAudio("sounds/hop.ogg");
+		});
+
 	},
 
 	/*

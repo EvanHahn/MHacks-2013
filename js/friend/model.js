@@ -156,7 +156,8 @@ Fudo.Friend = Fudo.Model.extend({
 	 */
 	hop: function(amount) {
 		if (this.get("coords")[1] >= this.get("centerY")) {
-			this.set("velocity", [0, amount * -1, 0])
+			this.set("velocity", [0, amount * -1, 0]);
+			this.trigger("hop");
 		}
 	},
 

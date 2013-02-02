@@ -31,8 +31,16 @@ Fudo.Friend = Fudo.Model.extend({
 		this.set("view", new Fudo.FriendView({ model: this }));
 
 		// Respond to things!
+		this.on("change:name", this.changeWindowTitle, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 
+	},
+
+	/*
+	 * Change the window title based on the name.
+	 */
+	changeWindowTitle: function() {
+		document.title = this.get("name") + " the fudo!";
 	},
 
 	/*

@@ -12,3 +12,4 @@ Poke
 confusion
 hop
 fear (shake/rattle)
+devil_laugh

@@ -13,14 +13,11 @@ Fudo.FriendView = Fudo.View.extend({
 
 		// Create the body layer.
 		this.bodyLayer = new Kinetic.Layer;
-		this.bodyImage = Fudo.Image("sprites/body.png");
-		this.bodyImage.width = 257;
-		this.bodyImage.height = 307;
 		this.bodySprite = new Kinetic.Image({
 			x: -1, y: -1,
-			image: this.bodyImage,
-			width: this.bodyImage.width,
-			height: this.bodyImage.height,
+			image: Fudo.Image("sprites/body.png"),
+			width: 257,
+			height: 307,
 		});
 		this.bodyLayer.add(this.bodySprite);
 		this.stage.add(this.bodyLayer);

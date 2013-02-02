@@ -3,7 +3,6 @@ Yawn
 Whistle
 Surprise
 snore
-fear (shake/rattle)
 anger
 
 
@@ -12,3 +11,4 @@ sigh
 Poke
 confusion
 hop
+fear (shake/rattle)

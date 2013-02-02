@@ -60,6 +60,7 @@ Fudo.Playground = Backbone.Model.extend({
 
 		// Do the every-frame stuff for each model inside.
 		this.get("models").each(function(model) {
+			model.onFrame();
 			model.doPhysics();
 			model.get("view").render();
 		});

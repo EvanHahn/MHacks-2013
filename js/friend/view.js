@@ -49,6 +49,32 @@ Fudo.FriendView = Fudo.View.extend({
 		this.rightEyeSprite.setX(50);
 		this.rightEyeSprite.setY(-160);
 
+		// Create the eyebrows.
+		this.leftEyebrowSprite = new Kinetic.Image({
+			image: Fudo.Image("sprites/eyebr_l.png"),
+			x: -75,
+			y: -190,
+			width: 42,
+			height: 16,
+			offset: {
+				x: 42 / 2,
+				y: 16 / 2,
+			}
+		});
+		this.group.add(this.leftEyebrowSprite);
+		this.leftEyebrowSprite = new Kinetic.Image({
+			image: Fudo.Image("sprites/eyebr_r.png"),
+			x: 50,
+			y: -190,
+			width: 42,
+			height: 18,
+			offset: {
+				x: 42 / 2,
+				y: 18 / 2,
+			}
+		});
+		this.group.add(this.leftEyebrowSprite);
+
 	},
 
 	/*

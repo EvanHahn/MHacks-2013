@@ -11,6 +11,7 @@ Fudo.Friend = Fudo.Model.extend({
 		"happiness",
 		"tiredness",
 		"surprise",
+		"fear",
 	],
 
 	/*
@@ -29,6 +30,7 @@ Fudo.Friend = Fudo.Model.extend({
 		// Set up some initial properties.
 		this.set("x", 500);
 		this.set("y", 500);
+		this.set("state", "idle");
 
 		// Fetch stuff.
 		this.fetch();
@@ -44,16 +46,6 @@ Fudo.Friend = Fudo.Model.extend({
 		this.on("change:name", this.changeWindowTitle, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 
-		// Wiggle wiggle wiggle wiggle wiggle, yeah!
-		this.set("angularAcceleration", -.0000001);
-		var self = this;
-		setInterval(function() {
-			self.set("angularAcceleration", self.get("angularAcceleration") * -1);
-		}, 1000);
-		setInterval(function() {
-			self.set("angularAcceleration", self.get("angularAcceleration") * -1);
-		}, 2000);
-
 	},
 
 	/*
@@ -64,6 +56,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.set("happiness", .5);
 		this.set("tiredness", -1);
 		this.set("surprise", 0.1);
+		this.set("fear", -1);
 		this.set("isNew", false);
 	},
 
@@ -74,6 +67,21 @@ Fudo.Friend = Fudo.Model.extend({
 		age: function() {
 			return (new Date) - this.get("birthday");
 		},
+	},
+
+	/*
+	 * On every frame...
+	 */
+	onFrame: function() {
+
+		// Idle state.
+		if (this.get("state") == "idle") {
+
+			// Wobble!
+			this.set("angle", Math.sin(Date.now() / 500) / 25);
+
+		}
+
 	},
 
 	/*

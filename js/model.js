@@ -50,6 +50,11 @@ Fudo.Model = Backbone.Model.extend({
 	},
 
 	/*
+	 * Overridable onframe.
+	 */
+	onFrame: Fudo.noop,
+
+	/*
 	 * Do physics calculations.
 	 */
 	doPhysics: function() {

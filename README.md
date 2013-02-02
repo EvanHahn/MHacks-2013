@@ -8,6 +8,6 @@ Fudo loves the following libraries:
 * [Lodash](http://lodash.com/), version 1.0.0-rc.3, MIT License
 * [Backbone.js](http://backbonejs.org/), version 0.9.10, MIT License
 * [Backbone.Mutators](http://asciidisco.github.com/Backbone.Mutators), version 0.3.0, MIT License
-* [stats.js](https://github.com/mrdoob/stats.js), version r11, MIT License
 * [Moment.js](http://momentjs.com/), version 1.7.2, MIT License
 * [RGBColor](http://www.phpied.com/rgb-color-parser-in-javascript/), version 1.7.2, "Use it if you like it"
+* [JavaScript AudioFX](https://github.com/jakesgordon/javascript-audio-fx/), version 0.4.0, MIT License

@@ -125,7 +125,7 @@ Fudo.FriendView = Fudo.View.extend({
 			}
 		});
 		this.group.add(this.mouthSprite);
-		
+
 		// Sounds
 		Fudo.playAudio("sounds/happy_jingle.ogg");
 
@@ -207,6 +207,9 @@ Fudo.FriendView = Fudo.View.extend({
 		if (this.model.get("fear") > 0) {
 			var fearShift = Math.random() * this.model.get("fear") * 5;
 			xShift += fearShift;
+		}
+		if (this.model.get("fear") > .9) {
+			Fudo.playAudio("sounds/fear_rattle.ogg");
 		}
 
 		// Change size based on age.

@@ -24,6 +24,7 @@ Fudo.FriendView = Fudo.View.extend({
 			eyebrowLeftNeutral: Fudo.Image("sprites/eyebr_l.png"),
 			eyebrowRightNeutral: Fudo.Image("sprites/eyebr_r.png"),
 			mouthHappyOpen: Fudo.Image("sprites/mouth.png"),
+			mouthNeutralClosed: Fudo.Image("sprites/mouth_0.png"),
 		};
 
 		// Create the body sprite.
@@ -104,6 +105,13 @@ Fudo.FriendView = Fudo.View.extend({
 	 * Render the friend view.
 	 */
 	render: function() {
+
+		// Change the mouth accordingly.
+		if (this.model.get("happiness") > .5) {
+			this.mouthSprite.setImage(this.images.mouthHappyOpen);
+		} else {
+			this.mouthSprite.setImage(this.images.mouthNeutralClosed);
+		}
 
 		// Place the group.
 		this.group.setX(this.model.get("x"));

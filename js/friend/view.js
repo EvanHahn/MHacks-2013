@@ -93,11 +93,11 @@ Fudo.FriendView = Fudo.View.extend({
 			image: this.images.mouthHappyOpen,
 			x: -5,
 			y: -125,
-			width: 45,
-			height: 30,
+			width: 80,
+			height: 55,
 			offset: {
-				x: 45 / 2,
-				y: 18 / 2
+				x: 80 / 2,
+				y: 55 / 2
 			}
 		});
 		this.group.add(this.mouthSprite);
@@ -120,8 +120,12 @@ Fudo.FriendView = Fudo.View.extend({
 		// Change the mouth accordingly.
 		if (this.model.get("happiness") > .5) {
 			this.mouthSprite.setImage(this.images.mouthHappyOpen);
-		} else {
+		} else if (this.model.get("happiness") >= 0) {
 			this.mouthSprite.setImage(this.images.mouthNeutralClosed);
+		} else if (this.model.get("happiness") > -.5) {
+			this.mouthSprite.setImage(this.images.mouthStraightClosed);
+		} else {
+			this.mouthSprite.setImage(this.images.mouthSadOpen);
 		}
 
 		// Change size based on age.

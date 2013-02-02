@@ -44,6 +44,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.set("view", new Fudo.FriendView({ model: this }));
 
 		// Respond to things!
+		this.changeWindowTitle();
 		this.on("change:name", this.changeWindowTitle, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 

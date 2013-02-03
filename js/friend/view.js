@@ -179,7 +179,7 @@ Fudo.FriendView = Fudo.View.extend({
 			}
 		});
 		this.speechBubbleGroup.add(this.speechBubbleSprite);
-		this.layer.add(this.speechBubbleGroup);
+		// this.layer.add(this.speechBubbleGroup);
 
 		// Bind some events to some sounds.
 		this.model.on("hop", function() {

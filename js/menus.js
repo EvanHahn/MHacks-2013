@@ -1,7 +1,7 @@
 /*
  * Settings menu.
  */
-$(".settings-menu").show();
+// $(".settings-menu").show();
 $(".settings-menu input").on("change", function() {
 	var $this = $(this);
 	var val = parseFloat($this.val());

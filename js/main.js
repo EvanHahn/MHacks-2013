@@ -44,7 +44,9 @@
 		$(".food-button").on("click", function() {
 			var type = $(this).data("food");
 			if (type == "cupcake") {
-				var cupcake = new Fudo.Cupcake({ playground: playground });
+				new Fudo.Cupcake({ playground: playground });
+			} else if (type == "snake") {
+				new Fudo.Snake({ playground: playground });
 			}
 		});
 

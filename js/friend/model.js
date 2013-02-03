@@ -96,7 +96,8 @@ Fudo.Friend = Fudo.Model.extend({
 		var previous = this.previous("happiness");
 
 		// Quiet the music if I'm really sad.
-		this.get("playground").get("music").volume = (this.get("happiness") + 1) / 2;
+		if (this.get("evil") < 1)
+			this.get("playground").get("music").volume = (this.get("happiness") + 1) / 2;
 
 	},
 
@@ -119,6 +120,7 @@ Fudo.Friend = Fudo.Model.extend({
 
 		// SHUT IT ALL UP, SCREAM ＤＥＭＯＮ
 		this.get("playground").get("music").volume = 0;
+		this.get("playground").get("music").src = "sounds/bgm_evil.ogg";
 		Fudo.playAudio("sounds/demon_spoken.ogg");
 
 		// MOVE MOOD

@@ -76,7 +76,7 @@ Fudo.Friend = Fudo.Model.extend({
 			return ($(window).width() / 2);
 		},
 		centerY: function() {
-			return ($(window).height() / 2) + 100;
+			return ($(window).height() / 2) + 200;
 		},
 	},
 

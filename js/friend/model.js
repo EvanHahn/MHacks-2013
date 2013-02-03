@@ -41,6 +41,7 @@ Fudo.Friend = Fudo.Model.extend({
 			evil: 0,
 			hunger: 0,
 			state: "idle",
+			message: null,
 		};
 	},
 
@@ -295,9 +296,10 @@ Fudo.Friend = Fudo.Model.extend({
 				this.set("y", (Math.sin((now / 300) + Math.PI) * 50) + Fudo.center.y() - 100);
 			}
 
-			// Play hunger sound if you haven't eaten in awhile.
+			// Hungry?
 			if (this.get("hunger") >= 0.9) {
 				Fudo.playAudio("sounds/hungry.ogg").volume = 0.3;
+				this.set("message", "hungry");
 			}
 
 			// Make the angle proper depending on tiredness.

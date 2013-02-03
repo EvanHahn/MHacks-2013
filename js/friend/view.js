@@ -21,6 +21,7 @@ Fudo.FriendView = Fudo.View.extend({
 		this.images = {
 			body: Fudo.Image("sprites/body.png"),
 			bodyDemon: Fudo.Image("sprites/body_devil.png"),
+			bodyAngel: Fudo.Image("sprites/body_angel.png"),
 			eyeNeutral: Fudo.Image("sprites/eye.png"),
 			eyeLeftDilated: Fudo.Image("sprites/eyeDilated_l.png"),
 			eyeRightDilated: Fudo.Image("sprites/eyeDilated_r.png"),
@@ -47,10 +48,19 @@ Fudo.FriendView = Fudo.View.extend({
 			wingsRightDemonSmall: Fudo.Image("sprites/wingsDemon1_r.png"),
 			wingsLeftDemonBig: Fudo.Image("sprites/wingsDemon2_l.png"),
 			wingsRightDemonBig: Fudo.Image("sprites/wingsDemon2_r.png"),
+			wingsLeftAngelSmall: Fudo.Image("sprites/wingsAngel1_l.png"),
+			wingsRightAngelSmall: Fudo.Image("sprites/wingsAngel1_r.png"),
+			wingsLeftAngelBig: Fudo.Image("sprites/wingsAngel2_l.png"),
+			wingsRightAngelBig: Fudo.Image("sprites/wingsAngel2_r.png"),
+			hornsAngelMany: Fudo.Image("sprites/hornsAngel2.png"),
+			hornsAngelOne: Fudo.Image("sprites/hornsAngel1.png"),
 			hornsDemonBig: Fudo.Image("sprites/hornsDemon3.png"),
 			hornsDemonMedium: Fudo.Image("sprites/hornsDemon2.png"),
 			hornsDemonSmall: Fudo.Image("sprites/hornsDemon1.png"),
 			speechBubble: Fudo.Image("sprites/speech.png"),
+			speechHungry: Fudo.Image("sprites/cupcake_small.png"),
+			speechHungry: Fudo.Image("sprites/snake_small.png"),
+			speechLove: Fudo.Image("sprites/heart.png"),
 		};
 
 		// Create the wings.
@@ -178,8 +188,19 @@ Fudo.FriendView = Fudo.View.extend({
 				y: 190
 			}
 		});
+		this.speechBubbleIconSprite = new Kinetic.Image({
+			image: this.images.speechHungry,
+			x: 50, y: -90,
+			width: 200,
+			height: 200,
+			offset: {
+				x: 200 / 2,
+				y: 200 / 2,
+			}
+		});
 		this.speechBubbleGroup.add(this.speechBubbleSprite);
-		// this.layer.add(this.speechBubbleGroup);
+		this.speechBubbleGroup.add(this.speechBubbleIconSprite);
+		this.layer.add(this.speechBubbleGroup);
 
 		// Bind some events to some sounds.
 		this.model.on("hop", function() {
@@ -229,10 +250,13 @@ Fudo.FriendView = Fudo.View.extend({
 		this.rightEyebrowSprite.setImage(this.images.eyebrowRightNeutral);
 
 		// Which body?
-		if (this.model.get("evil") < 1)
-			this.bodySprite.setImage(this.images.body);
-		else
+		if (this.model.get("evil") == 1) {
 			this.bodySprite.setImage(this.images.bodyDemon);
+		} else if (this.model.get("evil") == -1) {
+			this.bodySprite.setImage(this.images.bodyAngel);
+		} else {
+			this.bodySprite.setImage(this.images.body);
+		}
 
 		// Shift the eyes.
 		var eyeXMovement = 0;
@@ -327,6 +351,12 @@ Fudo.FriendView = Fudo.View.extend({
 		} else if (this.model.get("evil") > .4) {
 			this.leftWingSprite.setImage(this.images.wingsLeftDemonSmall);
 			this.rightWingSprite.setImage(this.images.wingsRightDemonSmall);
+		} else if (this.model.get("evil") < -.8) {
+			this.leftWingSprite.setImage(this.images.wingsLeftAngelBig);
+			this.rightWingSprite.setImage(this.images.wingsRightAngelBig);
+		} else if (this.model.get("evil") < -.6) {
+			this.leftWingSprite.setImage(this.images.wingsLeftAngelSmall);
+			this.rightWingSprite.setImage(this.images.wingsRightAngelSmall);
 		} else {
 			this.leftWingSprite.setVisible(false);
 			this.rightWingSprite.setVisible(false);
@@ -351,17 +381,18 @@ Fudo.FriendView = Fudo.View.extend({
 		}
 
 		// Rotate wings.
-		if (Math.abs(this.model.get("evil") < 1)) {
+		if (Math.abs(this.model.get("evil")) < 1) {
 			this.leftWingSprite.setRotation(Math.cos(now / 600) * .5);
 			this.rightWingSprite.setRotation(Math.sin(now / 600) * .5);
 		} else {
+			console.log("full demon or angel");
 			this.leftWingSprite.setRotation(-Math.sin(now / 300) * .85);
 			this.rightWingSprite.setRotation(Math.sin(now / 300) * .85);
 		}
 
 		// Change size based on age.
 		var scale = Math.max(Math.min(1, this.model.get("age") / 300000), .5);
-		if (this.model.get("age") > 10000000) {
+		if (this.model.get("evil") >= 1) {
 			scale = (Math.sin(Date.now() / 600) * .1) + 1.2;
 		}
 		this.group.setScale(scale, scale);
@@ -372,8 +403,21 @@ Fudo.FriendView = Fudo.View.extend({
 		this.group.setRotation(this.model.get("angle") + angleShift);
 
 		// Draw the speech bubble.
-		this.speechBubbleGroup.setX(this.model.get("x") + 100);
-		this.speechBubbleGroup.setY(this.model.get("y") - 200 + Math.sin(Date.now() / 500) * 10);
+		if (this.model.get("message") == null) {
+			this.speechBubbleGroup.setVisible(false);
+		} else {
+			this.speechBubbleGroup.setVisible(true);
+			this.speechBubbleGroup.setX(this.model.get("x") + 100);
+			this.speechBubbleGroup.setY(this.model.get("y") - 200 + Math.sin(Date.now() / 500) * 10);
+			if (this.model.get("message") == "hungry") {
+				if (this.model.get("evil") < 1)
+					this.speechBubbleIconSprite.setImage(this.images.speechHungry);
+				else
+					this.speechBubbleIconSprite.setImage(this.images.speechSnake);
+			} else if (this.model.get("message") == "love") {
+				this.speechBubbleIconSprite.setImage(this.images.speechLove);
+			}
+		}
 
 		// Draw!
 		this.layer.draw();

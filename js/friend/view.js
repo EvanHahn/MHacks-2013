@@ -47,6 +47,9 @@ Fudo.FriendView = Fudo.View.extend({
 			wingsRightDemonSmall: Fudo.Image("sprites/wingsDemon1_r.png"),
 			wingsLeftDemonBig: Fudo.Image("sprites/wingsDemon2_l.png"),
 			wingsRightDemonBig: Fudo.Image("sprites/wingsDemon2_r.png"),
+			hornsDemonBig: Fudo.Image("sprites/hornsDemon3.png"),
+			hornsDemonMedium: Fudo.Image("sprites/hornsDemon2.png"),
+			hornsDemonSmall: Fudo.Image("sprites/hornsDemon1.png"),
 		};
 
 		// Create the wings.
@@ -133,6 +136,20 @@ Fudo.FriendView = Fudo.View.extend({
 			}
 		});
 		this.group.add(this.rightEyebrowSprite);
+
+		// Create the horns.
+		this.hornSprite = new Kinetic.Image({
+			image: this.images.hornsDemonBig,
+			x: 0,
+			y: -270,
+			width: 210,
+			height: 112,
+			offset: {
+				x: 210 / 2,
+				y: 112 / 2
+			}
+		});
+		this.group.add(this.hornSprite);
 
 		// Create the mouth.
 		this.mouthSprite = new Kinetic.Image({
@@ -253,6 +270,9 @@ Fudo.FriendView = Fudo.View.extend({
 		}
 
 		// Change stuff based on evil mode.
+		this.hornSprite.setVisible(true);
+		this.leftWingSprite.setVisible(true);
+		this.rightWingSprite.setVisible(true);
 		if (this.model.get("evil") >= 1) {
 			this.mouthSprite.setImage(this.images.mouthHappierOpenDemon);
 			this.leftEyeSprite.setImage(this.images.eyeSparkle);
@@ -260,8 +280,6 @@ Fudo.FriendView = Fudo.View.extend({
 			this.leftEyebrowSprite.setImage(this.images.eyebrowLeftMad);
 			this.rightEyebrowSprite.setImage(this.images.eyebrowRightMad);
 		}
-		this.leftWingSprite.setVisible(true);
-		this.rightWingSprite.setVisible(true);
 		if (this.model.get("evil") > .8) {
 			this.leftWingSprite.setImage(this.images.wingsLeftDemonBig);
 			this.rightWingSprite.setImage(this.images.wingsRightDemonBig);
@@ -271,6 +289,15 @@ Fudo.FriendView = Fudo.View.extend({
 		} else {
 			this.leftWingSprite.setVisible(false);
 			this.rightWingSprite.setVisible(false);
+		}
+		if (this.model.get("evil") >= 1) {
+			this.hornSprite.setImage(this.images.hornsDemonBig);
+		} else if (this.model.get("evil") > .6) {
+			this.hornSprite.setImage(this.images.hornsDemonMedium);
+		} else if (this.model.get("evil") > .2) {
+			this.hornSprite.setImage(this.images.hornsDemonSmall);
+		} else {
+			this.hornSprite.setVisible(false);
 		}
 
 		// Change size based on age.

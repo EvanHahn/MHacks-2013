@@ -8,6 +8,9 @@ $(".settings-menu input").on("change", function() {
 	var property = this.name;
 	friend.set(property, val);
 });
+$(".settings-menu .demon").on("click", function() {
+	friend.set("evil", 1);
+});
 $(".settings-menu .kill").on("click", function() {
 	Fudo.local.remove("friend");
 	location.href = "index.html";

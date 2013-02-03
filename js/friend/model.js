@@ -151,7 +151,7 @@ Fudo.Friend = Fudo.Model.extend({
 			$(document.body).show();
 		}, 500);
 
-		// GET OLD
+		// AGE A THOUSAND MOONS
 		this.set("birthday", -666);
 
 	},
@@ -293,6 +293,7 @@ Fudo.Friend = Fudo.Model.extend({
 			toSave[attribute] = this.get(attribute);
 		}, this);
 		toSave.updatedAt = Date.now();
+		toSave.version = Fudo.VERSION;
 		var saveString = JSON.stringify(toSave);
 
 		// Local storage sync.

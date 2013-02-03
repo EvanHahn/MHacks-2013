@@ -40,5 +40,15 @@ $(document).ready(function() {
 		location.href = "playground.html";
 		return false;
 	});
+	
+	// While we wait, load the vendor libraries and the images.
+	var vendors = ["requestanimationframe", "kinetic", "lodash", "backbone", "backbone.mutators"];
+	vendors.forEach(function(name) {
+		loadScript("vendor/" + name + ".js");
+	});
+	var images = ["background1", "background_demon", "background_angel", "cupcake_small", "heart", "speech", "snake_small"];
+	images.forEach(function(name) {
+		loadScript("sprites/" + name + ".png");
+	});
 
 });

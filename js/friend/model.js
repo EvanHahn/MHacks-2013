@@ -37,6 +37,10 @@ Fudo.Friend = Fudo.Model.extend({
 		// Fetch stuff.
 		this.fetch();
 
+		// More initial properties, based on other stuff.
+		if (this.get("evil") >= 1)
+			this.enterDemonMode();
+
 		// If we're totally new, do the first initialize.
 		if (this.get("isNew") !== false)
 			this.firstInitialize();
@@ -48,6 +52,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.changeWindowTitle();
 		this.on("change:name", this.changeWindowTitle, this);
 		this.on("change:happiness", this.handleHappinessChange, this);
+		this.on("change:evil", this.handleEvilChange, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 
 	},
@@ -62,6 +67,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.set("surprise", 0.1);
 		this.set("boredom", Fudo.randomRange(-1, 1));
 		this.set("fear", -1);
+		this.set("evil", 0);
 		this.set("isNew", false);
 		this.sync();
 	},
@@ -105,6 +111,55 @@ Fudo.Friend = Fudo.Model.extend({
 	},
 
 	/*
+	 * When evil is changed...
+	 */
+	handleEvilChange: function() {
+
+		// ENTER ＤＥＭＯＮ MODE
+		if (this.get("evil") >= 1) {
+			this.enterDemonMode();
+		}
+
+	},
+
+	/*
+	 * ＤＥＭＯＮﾠＭＯＤＥ
+	 */
+	enterDemonMode: function() {
+
+		// SHUT IT ALL UP, SCREAM ＤＥＭＯＮ
+		this.get("playground").get("music").volume = 0;
+		Fudo.playAudio("sounds/demon_spoken.ogg");
+
+		// WELCOME TO HELL
+		$(document.body).hide();
+		$(document.documentElement).css({ background: "#000" });
+		setTimeout(function() {
+			$(document.documentElement).css({ background: "#fff" });
+		}, 100);
+		setTimeout(function() {
+			$(document.documentElement).css({ background: "#000" });
+		}, 200);
+		setTimeout(function() {
+			$(document.documentElement).css({ background: "#fff" });
+		}, 300);
+		setTimeout(function() {
+			$(document.documentElement).css({ background: "#000" });
+		}, 400);
+		setTimeout(function() {
+			$(document.documentElement).css({ background: "#fff" });
+			$(document.body).css({
+				background: "#000 url(sprites/background_demon.png) no-repeat center center",
+			});
+			$(document.body).show();
+		}, 500);
+
+		// GET OLD
+		this.set("birthday", -666);
+
+	},
+
+	/*
 	 * On every frame...
 	 */
 	onFrame: function() {
@@ -124,14 +179,20 @@ Fudo.Friend = Fudo.Model.extend({
 
 			// Wobble!
 			if (this.get("fear") < .5) {
-				if (this.get("boredom") > .5) {
-					this.set("angle", Math.sin(now / 800) / 3);
-				} else if (this.get("boredom") < -.5) {
-					if (Math.floor(Date.now() / 100) % 10)
-						this.hop(1);
+
+				if (this.get("evil") < 1) {
+					if (this.get("boredom") > .5) {
+						this.set("angle", Math.sin(now / 800) / 3);
+					} else if (this.get("boredom") < -.5) {
+						if (Math.floor(Date.now() / 100) % 10)
+							this.hop(1);
+					} else {
+						this.set("angle", Math.sin(now / 500) / 25);
+					}
 				} else {
-					this.set("angle", Math.sin(now / 500) / 25);
+					this.set("angle", Math.sin(now / 100) / 25);
 				}
+
 			} else {
 				this.set("angle", 0);
 			}
@@ -152,6 +213,8 @@ Fudo.Friend = Fudo.Model.extend({
 			if (this.get("happiness") < -.9) {
 				Fudo.playAudio("sounds/waaaaa.ogg").volume = .3;
 			}
+
+			// If a demon, scream
 
 		}
 

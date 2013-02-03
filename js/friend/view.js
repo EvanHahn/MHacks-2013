@@ -20,6 +20,7 @@ Fudo.FriendView = Fudo.View.extend({
 		// Define all the images.
 		this.images = {
 			body: Fudo.Image("sprites/body.png"),
+			bodyDemon: Fudo.Image("sprites/body_devil.png"),
 			eyeNeutral: Fudo.Image("sprites/eye.png"),
 			eyeLeftDilated: Fudo.Image("sprites/eyeDilated_l.png"),
 			eyeRightDilated: Fudo.Image("sprites/eyeDilated_r.png"),
@@ -28,6 +29,8 @@ Fudo.FriendView = Fudo.View.extend({
 			eyeSparkle: Fudo.Image("sprites/eyeSparkle.png"),
 			eyebrowLeftNeutral: Fudo.Image("sprites/ebNeutral_l.png"),
 			eyebrowRightNeutral: Fudo.Image("sprites/ebNeutral_r.png"),
+			eyebrowLeftMad: Fudo.Image("sprites/ebMad_l.png"),
+			eyebrowRightMad: Fudo.Image("sprites/ebMad_r.png"),
 			eyeBlink: Fudo.Image("sprites/blink.png"),
 			eyeMidBlink: Fudo.Image("sprites/midblink.png"),
 			mouthHappierOpen: Fudo.Image("sprites/mouthHappierOpen.png"),
@@ -37,6 +40,7 @@ Fudo.FriendView = Fudo.View.extend({
 			mouthSadClosed: Fudo.Image("sprites/mouthSadClosed.png"),
 			mouthSadOpen: Fudo.Image("sprites/mouthSadOpen.png"),
 			mouthSadderOpen: Fudo.Image("sprites/mouthSadderOpen.png"),
+			mouthTeeth: Fudo.Image("sprites/mouthTeeth.png"),
 			shadow: Fudo.Image("sprites/shadow.png"),
 		};
 
@@ -149,6 +153,12 @@ Fudo.FriendView = Fudo.View.extend({
 			sprite.setRotation(0);
 		});
 
+		// Which body?
+		if (this.model.get("evil") < 1)
+			this.bodySprite.setImage(this.images.body);
+		else
+			this.bodySprite.setImage(this.images.bodyDemon);
+
 		// Shift the eyes.
 		var eyeXMovement = 0;
 		var eyeYMovement = 0;
@@ -215,9 +225,21 @@ Fudo.FriendView = Fudo.View.extend({
 			Fudo.playAudio("sounds/fear_rattle.ogg");
 		}
 
+		// Crazy demon mode.
+		if (this.model.get("evil") >= 1) {
+			this.mouthSprite.setImage(this.images.mouthTeeth);
+			this.leftEyeSprite.setImage(this.images.eyeSparkle);
+			this.rightEyeSprite.setImage(this.images.eyeSparkle);
+			this.leftEyebrowSprite.setImage(this.images.eyebrowLeftMad);
+			this.rightEyebrowSprite.setImage(this.images.eyebrowRightMad);
+		}
+
 		// Change size based on age.
 		var scale = Math.max(Math.min(1, this.model.get("age") / 300000), .5);
 		this.group.setScale(scale, scale);
+		if (this.model.get("age") > 10000000) {
+			this.group.setScale(1.2, 1.2);
+		}
 
 		// Move the shadow.
 		this.shadowSprite.setX(this.model.get("centerX"));

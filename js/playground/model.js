@@ -14,6 +14,11 @@ Fudo.Playground = Backbone.Model.extend({
 			width: 1, height: 1
 		}));
 
+		// Change the background.
+		$(document.body).css({
+			background: "#000 url(sprites/background1.png) no-repeat center center",
+		});
+
 		// When we resize the window, resize the stage.
 		this._handleResize();
 		this._handleResize = _(this._handleResize).bind(this);

@@ -141,7 +141,7 @@ Fudo.Friend = Fudo.Model.extend({
 	moveToCenter: function() {
 		this.set("coords", [
 			$(window).width() / 2,
-			($(window).height() / 2) + 100,
+			($(window).height() / 2) + 200,
 			0
 		]);
 	},

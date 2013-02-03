@@ -78,6 +78,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.on("change:evil", this.evilChanged, this);
 		this.on("change:tiredness", this.tirednessChanged, this);
 		this.on("change:hunger", this.hungerChanged, this);
+		this.on("change:y", this.yChanged, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 
 		// Don't let bounded properties get too large.
@@ -212,19 +213,27 @@ Fudo.Friend = Fudo.Model.extend({
 	},
 
 	/*
-	 * On every frame...
+	 * When Y changes...
 	 */
-	onFrame: function() {
-
-		var now = Date.now();
+	yChanged: function() {
 
 		// Should I be falling?
 		if (this.get("y") < Fudo.center.y()) {
 			this.set("accelerationY", .01);
 		} else {
+			this.set("y", Fudo.center.y());
 			this.set("accelerationY", 0);
 			this.set("velocityY", 0);
 		}
+
+	},
+
+	/*
+	 * On every frame...
+	 */
+	onFrame: function() {
+
+		var now = Date.now();
 
 		// Idle state.
 		if (this.get("state") == "idle") {

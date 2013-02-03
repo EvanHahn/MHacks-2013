@@ -185,6 +185,10 @@ Fudo.FriendView = Fudo.View.extend({
 		this.model.on("hop", function() {
 			Fudo.playAudio("sounds/hop.ogg");
 		});
+		var self = this;
+		this.bodySprite.on("click", function() {
+			self.model.hop(2);
+		});
 
 	},
 
@@ -318,10 +322,10 @@ Fudo.FriendView = Fudo.View.extend({
 
 		// Change size based on age.
 		var scale = Math.max(Math.min(1, this.model.get("age") / 300000), .5);
-		this.group.setScale(scale, scale);
 		if (this.model.get("age") > 10000000) {
-			this.group.setScale(1.2, 1.2);
+			scale = (Math.sin(Date.now() / 600) * .1) + 1.2;
 		}
+		this.group.setScale(scale, scale);
 
 		// Place the group.
 		this.group.setX(this.model.get("x") - xShift);

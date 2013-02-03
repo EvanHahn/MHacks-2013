@@ -20,36 +20,8 @@ Fudo.Playground = Backbone.Model.extend({
 		$(window).on("resize", this._handleResize);
 
 		// Start the game loop.
-		this.updateBackground();
-		setInterval(this.updateBackground, 5000);
 		this.frame = _(this.frame).bind(this);
 		requestAnimationFrame(this.frame);
-
-	},
-
-	/*
-	 * Update the background.
-	 */
-	updateBackground: function() {
-
-		// What is the min and max of the colors?
-		var minColor = new RGBColor("#112");
-		var maxColor = new RGBColor("#eef");
-
-		// What should our multiplier be?
-		var now = moment();
-		var noon = moment().seconds(0).minutes(0).hours(12);
-		var timeDiff = Math.abs(now.diff(noon));
-		var maxTimeDiff = Math.abs(noon.diff(moment().endOf("day")));
-		var multiplier = 1 - (timeDiff / maxTimeDiff);
-
-		// Calculate the background color
-		var r = Math.floor(minColor.r + ((maxColor.r - minColor.r) * multiplier));
-		var g = Math.floor(minColor.g + ((maxColor.g - minColor.g) * multiplier));
-		var b = Math.floor(minColor.b + ((maxColor.b - minColor.b) * multiplier));
-
-		// All done!
-		document.body.style.background = "rgb("+r+","+g+","+b+")";
 
 	},
 

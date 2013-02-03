@@ -38,7 +38,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.fetch();
 
 		// If we're totally new, do the first initialize.
-		if (this.get("isNew"))
+		if (this.get("isNew") !== false)
 			this.firstInitialize();
 
 		// Build a view.

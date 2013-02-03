@@ -75,9 +75,9 @@ Fudo.Friend = Fudo.Model.extend({
 	/*
 	 * Some accessors.
 	 */
-	mutators: {
+	getters: {
 		age: function() {
-			return Date.now() - this.birthday;
+			return Date.now() - this.get("birthday");
 		},
 		centerX: function() {
 			return ($(window).width() / 2);

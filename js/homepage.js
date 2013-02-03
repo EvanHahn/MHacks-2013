@@ -36,13 +36,13 @@ $(document).ready(function() {
 	});
 
 	// While we wait, load the vendor libraries and the images.
-	var vendors = ["requestanimationframe", "kinetic", "lodash", "backbone", "backbone.mutators"];
+	var vendors = ["requestanimationframe", "kinetic", "lodash", "backbone", "backbone.accessors"];
 	vendors.forEach(function(name) {
 		loadScript("vendor/" + name + ".js");
 	});
 	var images = ["background1"];
 	images.forEach(function(name) {
-		loadScript("sprites/" + name + ".png");
+		loadImage("sprites/" + name + ".png");
 	});
 
 });

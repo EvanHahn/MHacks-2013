@@ -368,6 +368,10 @@ Fudo.FriendView = Fudo.View.extend({
 			this.hornSprite.setImage(this.images.hornsDemonMedium);
 		} else if (this.model.get("evil") > .2) {
 			this.hornSprite.setImage(this.images.hornsDemonSmall);
+		} else if (this.model.get("evil") < -.4) {
+			this.hornSprite.setImage(this.images.hornsAngelMany);
+		} else if (this.model.get("evil") < -.2) {
+			this.hornSprite.setImage(this.images.hornsAngelOne);
 		} else {
 			this.hornSprite.setVisible(false);
 		}

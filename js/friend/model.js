@@ -370,7 +370,7 @@ Fudo.Friend = Fudo.Model.extend({
 	 * Sync our friend with local storage and the server.
 	 * This is one-way: it writes to local storage and the server.
 	 */
-	sync: _.debounce(function() {
+	sync: _.throttle(function() {
 
 		// What to save?
 		var toSave = {};

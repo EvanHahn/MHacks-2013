@@ -1,9 +1,15 @@
+/*
+ * Load and run a JavaScript file.
+ */
 function loadScript(src) {
 	var script = document.createElement("script");
 	script.src = src;
 	document.head.appendChild(script);
 };
 
+/*
+ * Load an image.
+ */
 function loadImage(src) {
 	var image = new Image;
 	image.src = src;

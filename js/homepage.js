@@ -36,7 +36,7 @@ $(document).ready(function() {
 	});
 
 	// While we wait, load the vendor libraries and the images.
-	var vendors = ["requestanimationframe", "moment", "rgbcolor", "kinetic", "lodash", "backbone", "backbone.mutators"];
+	var vendors = ["requestanimationframe", "kinetic", "lodash", "backbone", "backbone.mutators"];
 	vendors.forEach(function(name) {
 		loadScript("vendor/" + name + ".js");
 	});

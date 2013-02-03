@@ -18,6 +18,7 @@ $(".settings-menu .kill").on("click", function() {
  */
 $(".food-menu .activate-button").on("click", function() {
 	$(".food-menu").addClass("active");
+	Fudo.playAudio("sounds/poke1.ogg");
 	return false;
 });
 $(".food-button").on("click", function() {
@@ -27,5 +28,6 @@ $(".food-button").on("click", function() {
 	} else if (type == "snake") {
 		new Fudo.Snake({ playground: playground });
 	}
+	Fudo.playAudio("sounds/poke2.ogg");
 	$(".food-menu").removeClass("active");
 });

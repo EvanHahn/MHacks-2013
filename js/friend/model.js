@@ -159,7 +159,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.get("playground").set("music", Fudo.playAudio("sounds/bgm_evil.ogg"));
 		Fudo.playAudio("sounds/demon_spoken.ogg");
 
-		// MOVE MOOD
+		// SHIFT YOUR MOOD AT WILL
 		this.set("evil", 1);
 		this.set("happiness", 1);
 		this.set("boredom", 0);
@@ -186,6 +186,9 @@ Fudo.Friend = Fudo.Model.extend({
 			});
 			$(document.body).show();
 		}, 500);
+
+		// YOU DESERVE TO STARVE
+		$(".food-menu").removeClass("active");
 
 		// AGE A THOUSAND MOONS
 		this.set("birthday", -666);

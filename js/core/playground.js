@@ -9,10 +9,7 @@ Fudo.Playground = Backbone.Model.extend({
 		this.set("models", new Backbone.Collection);
 
 		// Build the Kinetic stage.
-		this.set("stage", new Kinetic.Stage({
-			container: document.body,
-			width: 1, height: 1
-		}));
+		this.set("stage", new Kinetic.Stage({ container: document.body }));
 
 		// Change the background.
 		$(document.body).css({

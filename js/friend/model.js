@@ -99,6 +99,9 @@ Fudo.Friend = Fudo.Model.extend({
 			Fudo.playAudio("sounds/happy_jingle.ogg"); // TODO: this should be in the view
 		}
 
+		// Quiet the music if I'm really sad.
+		this.get("playground").get("music").volume = (this.get("happiness") + 1) / 2;
+
 	},
 
 	/*
@@ -147,7 +150,7 @@ Fudo.Friend = Fudo.Model.extend({
 
 			// Am I crying?
 			if (this.get("happiness") < -.9) {
-				Fudo.playAudio("sounds/waaaaa.ogg");
+				Fudo.playAudio("sounds/waaaaa.ogg").volume = .3;
 			}
 
 		}

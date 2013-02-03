@@ -28,6 +28,9 @@ Fudo.Playground = Backbone.Model.extend({
 		this.frame = _(this.frame).bind(this);
 		requestAnimationFrame(this.frame);
 
+		// Add the music.
+		this.set("music", Fudo.playAudio("sounds/bgm_1.ogg"));
+
 	},
 
 	/*

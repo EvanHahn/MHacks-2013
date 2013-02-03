@@ -213,6 +213,7 @@ Fudo.FriendView = Fudo.View.extend({
 		var pokeEye = function() {
 			self.model.set("eyePoke", true);
 			self.model.set("happiness", self.model.get("happiness") - .5);
+			self.model.set("fear", self.model.get("fear") + .25);
 			Fudo.playAudio("sounds/no_pout.ogg");
 			setTimeout(function() {
 				self.model.set("eyePoke", false);

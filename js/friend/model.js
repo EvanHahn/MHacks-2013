@@ -73,6 +73,8 @@ Fudo.Friend = Fudo.Model.extend({
 		// More initial properties, based on other stuff.
 		if (this.get("evil") >= 1)
 			this.enterDemonMode();
+		else if (this.get("evil") <= -1)
+			this.enterAngelMode();
 
 		// Respond to things.
 		this.on("change:happiness", this.happinessChanged, this);
@@ -139,6 +141,8 @@ Fudo.Friend = Fudo.Model.extend({
 		// ENTER ＤＥＭＯＮ MODE
 		if (this.get("evil") >= 1) {
 			this.enterDemonMode();
+		} else if (this.get("evil") <= -1) {
+			this.enterAngelMode();
 		}
 
 	},
@@ -181,6 +185,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.set("evil", 1);
 		this.set("happiness", 1);
 		this.set("boredom", 0);
+		this.set("hunger", -1);
 
 		// WELCOME TO HELL
 		$(document.body).hide();
@@ -208,8 +213,49 @@ Fudo.Friend = Fudo.Model.extend({
 		// YOU DESERVE TO STARVE
 		$(".food-menu").removeClass("active");
 
-		// AGE A THOUSAND MOONS
-		this.set("birthday", -666);
+	},
+
+	/*
+	 * Angel mode
+	 */
+	enterAngelMode: function() {
+
+		// Change sounds
+		this.get("playground").get("music").pause();
+		this.get("playground").set("music", Fudo.playAudio("sounds/bgm_angel.ogg"));
+		Fudo.playAudio("sounds/angel_wings.ogg");
+
+		// Change mood
+		this.set("evil", -1);
+		this.set("happiness", 1);
+		this.set("boredom", 0);
+		this.set("hunger", -1);
+
+		// Welcome to heaven!
+		$(document.body).hide();
+		$(document.documentElement).css({ background: "#6aecff" });
+		setTimeout(function() {
+			$(document.documentElement).css({ background: "#fff" });
+		}, 100);
+		setTimeout(function() {
+			$(document.documentElement).css({ background: "#6aecff" });
+		}, 200);
+		setTimeout(function() {
+			$(document.documentElement).css({ background: "#fff" });
+		}, 300);
+		setTimeout(function() {
+			$(document.documentElement).css({ background: "#6aecff" });
+		}, 400);
+		setTimeout(function() {
+			$(document.documentElement).css({ background: "#fff" });
+			$(document.body).css({
+				background: "#fff url(sprites/background_angel.png) no-repeat center center",
+			});
+			$(document.body).show();
+		}, 500);
+
+		// Hide food menu
+		$(".food-menu").removeClass("active");
 
 	},
 
@@ -246,7 +292,11 @@ Fudo.Friend = Fudo.Model.extend({
 			// Wobble!
 			if ((this.get("fear") < .5) && (this.get("tiredness") < .8)) {
 
-				if (this.get("evil") < 1) {
+				if (this.get("evil") === 1) {
+					this.set("angle", Math.sin(now / 500) / 6);
+				} else if (this.get("evil") === -1) {
+					this.set("angle", Math.sin(now / 500) / 6);
+				} else {
 					if (this.get("boredom") > .5) {
 						this.set("angle", Math.sin(now / 800) / 3);
 					} else if (this.get("boredom") < -.5) {
@@ -255,8 +305,6 @@ Fudo.Friend = Fudo.Model.extend({
 					} else {
 						this.set("angle", Math.sin(now / 500) / 25);
 					}
-				} else {
-					this.set("angle", Math.sin(now / 500) / 6);
 				}
 
 			} else if (this.get("tiredness") < .8) {

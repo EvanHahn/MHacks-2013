@@ -385,7 +385,6 @@ Fudo.FriendView = Fudo.View.extend({
 			this.leftWingSprite.setRotation(Math.cos(now / 600) * .5);
 			this.rightWingSprite.setRotation(Math.sin(now / 600) * .5);
 		} else {
-			console.log("full demon or angel");
 			this.leftWingSprite.setRotation(-Math.sin(now / 300) * .85);
 			this.rightWingSprite.setRotation(Math.sin(now / 300) * .85);
 		}

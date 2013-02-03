@@ -10,8 +10,10 @@ Fudo.Snake = Fudo.Food.extend({
 		if (friend.get("evil") < 1) {
 			friend.set("happiness", friend.get("happiness") - .3);
 			friend.set("evil", friend.get("evil") + .1);
-		}
-		else {
+			if (friend.get("evil") === -1) {
+				friend.trigger("change:y");
+			}
+		} else {
 			friend.set("happiness", 1);
 			friend.set("evil", friend.get("evil") + .1);
 			if (friend.get("hunger") > -.8) {

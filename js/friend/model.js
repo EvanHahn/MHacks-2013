@@ -47,6 +47,7 @@ Fudo.Friend = Fudo.Model.extend({
 		// Respond to things!
 		this.changeWindowTitle();
 		this.on("change:name", this.changeWindowTitle, this);
+		this.on("change:happiness", this.handleHappinessChange, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 
 	},
@@ -78,6 +79,26 @@ Fudo.Friend = Fudo.Model.extend({
 		centerY: function() {
 			return ($(window).height() / 2) + 200;
 		},
+	},
+
+	/*
+	 * When happiness is changed...
+	 */
+	handleHappinessChange: function() {
+
+		// What's the previous happiness?
+		var previous = this.previous("happiness");
+
+		// Did I get sadder?
+		if (previous > this.get("happiness")) {
+			Fudo.playAudio("sounds/no_pout.ogg"); // TODO: this should be in the view
+		}
+
+		// Am I super happy?
+		if (this.get("happiness") > .9) {
+			Fudo.playAudio("sounds/happy_jingle.ogg"); // TODO: this should be in the view
+		}
+
 	},
 
 	/*

@@ -44,3 +44,25 @@ Fudo.Image = function(src) {
 Fudo.randomRange = function(lower, upper) {
 	return Math.random() * (upper - lower) + lower;
 };
+
+/*
+ * Approach a value by a certain amount.
+ */
+
+Fudo.approach = function(start, finish, amount) {
+
+	amount = Math.abs(amount);
+
+	if (start < finish) {
+		start += amount;
+		if (start > finish)
+			start = finish;
+	} else {
+		start -= amount;
+		if (start < finish)
+			start = finish;
+	}
+
+	return start;
+
+};

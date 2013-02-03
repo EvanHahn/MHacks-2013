@@ -341,6 +341,10 @@ Fudo.FriendView = Fudo.View.extend({
 			this.rightEyebrowSprite.setImage(this.images.eyebrowRightMad);
 		}
 
+		// Rotate wings.
+		this.leftWingSprite.setRotation(Math.cos(Date.now() / 600) * .5);
+		this.rightWingSprite.setRotation(Math.sin(Date.now() / 600) * .5);
+
 		// Change size based on age.
 		var scale = Math.max(Math.min(1, this.model.get("age") / 300000), .5);
 		if (this.model.get("age") > 10000000) {

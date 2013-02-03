@@ -95,16 +95,6 @@ Fudo.Friend = Fudo.Model.extend({
 		// What's the previous happiness?
 		var previous = this.previous("happiness");
 
-		// Did I get sadder?
-		if (previous > this.get("happiness")) {
-			Fudo.playAudio("sounds/no_pout.ogg"); // TODO: this should be in the view
-		}
-
-		// Am I super happy?
-		if (this.get("happiness") > .9) {
-			Fudo.playAudio("sounds/happy_jingle.ogg"); // TODO: this should be in the view
-		}
-
 		// Quiet the music if I'm really sad.
 		this.get("playground").get("music").volume = (this.get("happiness") + 1) / 2;
 

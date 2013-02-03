@@ -41,6 +41,7 @@ Fudo.FriendView = Fudo.View.extend({
 			mouthSadOpen: Fudo.Image("sprites/mouthSadOpen.png"),
 			mouthSadderOpen: Fudo.Image("sprites/mouthSadderOpen.png"),
 			mouthTeeth: Fudo.Image("sprites/mouthTeeth.png"),
+			mouthHappierOpenDemon: Fudo.Image("sprites/mouthHappierOpen_D.png"),
 			shadow: Fudo.Image("sprites/shadow.png"),
 		};
 
@@ -227,7 +228,7 @@ Fudo.FriendView = Fudo.View.extend({
 
 		// Crazy demon mode.
 		if (this.model.get("evil") >= 1) {
-			this.mouthSprite.setImage(this.images.mouthTeeth);
+			this.mouthSprite.setImage(this.images.mouthHappierOpenDemon);
 			this.leftEyeSprite.setImage(this.images.eyeSparkle);
 			this.rightEyeSprite.setImage(this.images.eyeSparkle);
 			this.leftEyebrowSprite.setImage(this.images.eyebrowLeftMad);

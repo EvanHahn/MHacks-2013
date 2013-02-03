@@ -26,7 +26,22 @@
 </head>
 <body>
 
-Looks like you're using an unsupported browser.<br>Upgrade to try Fudo!
+<div class="unsupported-content">Looks like you're using an unsupported browser.<br>Upgrade to try Fudo!</div>
+
+<div class="settings-menu">
+	<h1>Settings</h1>
+
+	<label for="happiness">Happiness</label>
+	<input name="happiness" type="number" value="0" min="-1" max="1" step=".01"></input>
+
+	<label for="boredom">Boredom</label>
+	<input name="boredom" type="number" value="0" min="-1" max="1" step=".01"></input>
+
+	<label for="fear">Fear</label>
+	<input name="fear" type="number" value="0" min="-1" max="1" step=".01"></input>
+
+	<button class="kill">Kill</button>
+</div>
 
 </body>
 </html>

@@ -266,7 +266,7 @@ Fudo.Friend = Fudo.Model.extend({
 
 		// Should I be falling?
 		if (this.get("y") < Fudo.center.y()) {
-			if (Math.abs(this.get("evil")) >= 1) {
+			if (Math.abs(this.get("evil")) == 1) {
 				this.set("accelerationY", 0);
 			} else {
 				this.set("accelerationY", .01);

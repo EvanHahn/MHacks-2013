@@ -189,6 +189,16 @@ Fudo.FriendView = Fudo.View.extend({
 		this.bodySprite.on("click", function() {
 			self.model.hop(2);
 		});
+		var pokeEye = function() {
+			self.model.set("eyePoke", true);
+			self.model.set("happiness", self.model.get("happiness") - .25);
+			Fudo.playAudio("sounds/no_pout.ogg");
+			setTimeout(function() {
+				self.model.set("eyePoke", false);
+			}, 1000);
+		};
+		this.leftEyeSprite.on("click", pokeEye);
+		this.rightEyeSprite.on("click", pokeEye);
 
 	},
 
@@ -318,6 +328,13 @@ Fudo.FriendView = Fudo.View.extend({
 			this.hornSprite.setImage(this.images.hornsDemonSmall);
 		} else {
 			this.hornSprite.setVisible(false);
+		}
+
+		// Eye poke?
+		if (this.model.get("eyePoke")) {
+			this.leftEyeSprite.setImage(this.images.eyeLeftX);
+			this.rightEyeSprite.setImage(this.images.eyeRightX);
+			this.mouthSprite.setImage(this.images.mouthTeeth);
 		}
 
 		// Change size based on age.

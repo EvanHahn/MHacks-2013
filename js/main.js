@@ -23,7 +23,8 @@
 		document.body.id = "body";
 
 		// Make a playground. This also makes the Kinetic canvas.
-		var playground = new Fudo.Playground();
+		// It's intentionally in the global namespace.
+		window.playground = new Fudo.Playground();
 
 		// Make our friend.
 		// It's intentionally in the global namespace.

@@ -59,7 +59,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.set("happiness", .5);
 		this.set("tiredness", -1);
 		this.set("surprise", 0.1);
-		this.set("boredom", -0.5);
+		this.set("boredom", Fudo.randomRange(-1, 1));
 		this.set("fear", -1);
 		this.set("isNew", false);
 		this.sync();
@@ -122,6 +122,11 @@ Fudo.Friend = Fudo.Model.extend({
 			}
 			else {
 				this.set("blinking", false);
+			}
+
+			// Am I crying?
+			if (this.get("happiness") < -.9) {
+				Fudo.playAudio("sounds/waaaaa.ogg");
 			}
 
 		}

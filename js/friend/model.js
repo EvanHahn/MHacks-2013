@@ -62,6 +62,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.set("boredom", -0.5);
 		this.set("fear", -1);
 		this.set("isNew", false);
+		this.sync();
 	},
 
 	/*
@@ -197,7 +198,7 @@ Fudo.Friend = Fudo.Model.extend({
 		_(this.TO_SYNC).each(function(attribute) {
 			toSave[attribute] = this.get(attribute);
 		}, this);
-		toSave.updatedAt = new Date;
+		toSave.updatedAt = Date.now();
 		var saveString = JSON.stringify(toSave);
 
 		// Local storage sync.

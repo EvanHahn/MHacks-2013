@@ -18,12 +18,8 @@
 
 		// Make a friend.
 		var localFriend = Fudo.local.get("friend");
-		if (localFriend == null) {
-			var name = prompt("What's your fudo's name?");
-			// TODO: the name needs security -- what if there were html in them?
-			var localSave = { name: name, isNew: true };
-			Fudo.local.set("friend", JSON.stringify(localSave));
-		}
+		if (localFriend == null)
+			location.href = "index.html";
 		window.friend = new Fudo.Friend({ playground: playground });
 
 	});

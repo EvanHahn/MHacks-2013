@@ -4,17 +4,29 @@
 	<meta charset="UTF-8">
 	<title>Fudo!</title>
 	<link rel="stylesheet" href="homepage.css">
+	<script src="vendor/zepto.js"></script>
+	<script src="js/homepage.js"></script>
 </head>
 <body>
 
-	<header>
-		Fudo!
-	</header>
+	<form class="modal">
+		<div class="container">
+			<h1>What's your fudo's name?</h1>
+			<input type="text" id="name"></input>
+			<input type="submit" class="btn" value="Go!"></input>
+		</div>
+	</form>
 
-	<img class="fudo-image" src="sprites/demoangel.png">
+	<div class="content">
+		<header>
+			Fudo!
+		</header>
 
-	<div class="btn-container">
-		<a href="playground.html" class="btn">Get started!</a>
+		<img class="fudo-image" src="sprites/body.png">
+
+		<div class="btn-container">
+			<a href="playground.html" class="start btn">Get one!</a>
+		</div>
 	</div>
 
 </body>

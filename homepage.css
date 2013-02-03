@@ -11,30 +11,41 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
  * Homepage CSS
  */
 
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 html {
+	width: 100%;
+	height: 100%;
 	background-color: #fd6c2c;
+}
+
+.content {
+	width: 100%;
+	padding: 1em 0;
+	display: block;
 }
 
 header {
 	text-align: center;
-}
-
-header {
-	margin: .2em 0;
 	font-size: 88px;
 	font-family: Kavoon, Impact, sans-serif;
 	text-transform: uppercase;
 	color: #fff;
-	text-shadow: 1px 1px 0 #009, 2px 2px 0 #009;
+	text-shadow: 0 0 5px #000;
 }
 
 .fudo-image {
 	display: block;
-	margin: 1em auto;
+	margin: 2em auto;
 }
 
 
 .btn-container {
+	margin-top: 4em;
 	text-align: center;
 }
 
@@ -58,7 +69,7 @@ header {
 		from(#ffffff),
 		to(#ebebeb));
 	border-radius: 15px;
-	border: 1px solid #000000;
+	/* border: 1px solid #000000; */
 	-moz-box-shadow:
 		0px 1px 3px rgba(000,000,000,0.5),
 		inset 0px 0px 10px rgba(255,0,255,0.7);
@@ -69,6 +80,51 @@ header {
 		0px 1px 3px rgba(000,000,000,0.5),
 		inset 0px 0px 10px rgba(255,0,255,0.7);
 	text-shadow:
-		0px -1px 0px rgba(000,000,000,0),
 		0px 1px 0px rgba(255,255,255,0.3);
+}
+
+.modal {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background: rgba(0,0,0,.5);
+}
+
+.modal .container {
+	display: block;
+	width: 80%;
+	margin: 1em auto;
+	padding: 5em;
+	vertical-align: middle;
+	background: #fff;
+	text-align: center;
+	border-radius: 15px;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 10px rgba(255,0,255,0.7);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 10px rgba(255,0,255,0.7);
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 10px rgba(255,0,255,0.7);
+	text-shadow:
+		0px 1px 0px rgba(255,255,255,0.3);
+}
+
+.modal h1 {
+	font-family: Kavoon, Impact, sans-serif;
+	font-size: 32px;
+}
+
+.modal #name {
+	font-size: 32px;
+	font-family: sans-serif;
+}
+
+.modal input {
+	display: block;
+	margin: 1em auto;
 }

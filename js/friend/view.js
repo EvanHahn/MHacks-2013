@@ -51,7 +51,6 @@ Fudo.FriendView = Fudo.View.extend({
 				y: 36 / 2
 			}
 		});
-		// TODO: re-enable shadow
 		// this.layer.add(this.shadowSprite);
 		// this.shadowSprite.setZIndex(-5);
 

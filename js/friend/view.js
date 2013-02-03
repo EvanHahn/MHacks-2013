@@ -199,6 +199,13 @@ Fudo.FriendView = Fudo.View.extend({
 		};
 		this.leftEyeSprite.on("click", pokeEye);
 		this.rightEyeSprite.on("click", pokeEye);
+		this.mouthSprite.on("click", function() {
+			self.model.set("eyePoke", true);
+			setTimeout(function() {
+				self.model.set("eyePoke", false);
+			}, 200);
+			Fudo.playAudio("sounds/bite_gulp.ogg");
+		});
 
 	},
 

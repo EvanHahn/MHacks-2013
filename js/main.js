@@ -18,9 +18,8 @@
 	// Alright, we're good to go.
 	$(document).ready(function() {
 
-		// Squash the <body> and give it an ID for Kinetic to use.
+		// Remove the "you're unsupported" bit.
 		$(".unsupported-content").remove();
-		document.body.id = "body";
 
 		// Make a playground. This also makes the Kinetic canvas.
 		// It's intentionally in the global namespace.

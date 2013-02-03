@@ -21,6 +21,7 @@ Fudo.playAudio = function(src) {
 	}
 
 	// Play it!
+	stream.volume = 1;
 	stream.src = src;
 	stream.play();
 

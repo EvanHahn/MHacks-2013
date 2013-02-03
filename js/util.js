@@ -66,3 +66,16 @@ Fudo.approach = function(start, finish, amount) {
 	return start;
 
 };
+
+/*
+ * Center X and Y, but for the friend.
+ */
+
+Fudo.center = {
+	x: function() {
+		return $(window).width() / 2;
+	},
+	y: function() {
+		return ($(window).height() / 2) + 200;
+	},
+};

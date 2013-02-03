@@ -42,22 +42,7 @@ Fudo.FriendView = Fudo.View.extend({
 			mouthSadderOpen: Fudo.Image("sprites/mouthSadderOpen.png"),
 			mouthTeeth: Fudo.Image("sprites/mouthTeeth.png"),
 			mouthHappierOpenDemon: Fudo.Image("sprites/mouthHappierOpen_D.png"),
-			shadow: Fudo.Image("sprites/shadow.png"),
 		};
-
-		// Create the shadow sprite.
-		this.shadowSprite = new Kinetic.Image({
-			x: -1, y: -1,
-			image: this.images.shadow,
-			width: 175,
-			height: 36,
-			offset: {
-				x: 175 / 2,
-				y: 36 / 2
-			}
-		});
-		// this.layer.add(this.shadowSprite);
-		// this.shadowSprite.setZIndex(-5);
 
 		// Create the body sprite.
 		this.bodySprite = new Kinetic.Image({
@@ -242,15 +227,10 @@ Fudo.FriendView = Fudo.View.extend({
 			this.group.setScale(1.2, 1.2);
 		}
 
-		// Move the shadow.
-		this.shadowSprite.setX(this.model.get("centerX"));
-		this.shadowSprite.setY(this.model.get("centerY"));
-
-		// Place the group, and unrotate the shadow.
+		// Place the group.
 		this.group.setX(this.model.get("x") - xShift);
 		this.group.setY(this.model.get("y") + yShift);
 		this.group.setRotation(this.model.get("angle") + angleShift);
-		this.shadowSprite.setRotation(-this.model.get("angle"));
 
 		// Draw!
 		this.layer.draw();

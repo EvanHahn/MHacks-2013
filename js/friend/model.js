@@ -15,6 +15,18 @@ Fudo.Friend = Fudo.Model.extend({
 	],
 
 	/*
+	 * List the -1 to 1 properties.
+	 */
+	BOUNDED: [
+		"happiness",
+		"tiredness",
+		"surprise",
+		"fear",
+		"boredom",
+		"evil",
+	],
+
+	/*
 	 * Default properties.
 	 */
 	defaults: function() {
@@ -37,31 +49,47 @@ Fudo.Friend = Fudo.Model.extend({
 		// Call super.
 		Fudo.Model.prototype.initialize.apply(this, arguments);
 
+		// Fetch stuff.
+		this.fetch();
+
+		// Set up some initial properties.
+		this.set("x", Fudo.center.x());
+		this.set("y", -500);
+		this.changeWindowTitle();
+		if (this.get("name") == "666")
+			this.set("evil", 1);
+
+		// More initial properties, based on other stuff.
+		if (this.get("evil") >= 1)
+			this.enterDemonMode();
+
+		// Respond to things.
+		this.on("change:happiness", this.happinessChanged, this);
+		this.on("change:evil", this.evilChanged, this);
+		this.get("playground").on("resize", this.wallsMove, this);
+
+		// Don't let bounded properties get too large.
+		_(this.BOUNDED).each(function(attribute) {
+			this.setters[attribute] = function(value) {
+				if (value < -1)
+					return -1;
+				else if (value > 1)
+					return 1;
+				else
+					return value;
+			};
+		}, this);
+
 		// Make sure that we sync whatever we should sync.
 		_(this.TO_SYNC).each(function(attribute) {
 			this.on("change:" + attribute, this.sync, this);
 		}, this);
 
-		// Set up some initial properties.
-		this.set("x", this.get("centerX"));
-		this.set("y", -500);
+		// Do an initial sync.
+		this.sync();
 
-		// Fetch stuff.
-		this.fetch();
-
-		// More initial properties, based on other stuff.
-		if ((this.get("evil") >= 1) || (this.get("name") == "666"))
-			this.enterDemonMode();
-
-		// Build a view.
+		// Set up the view.
 		this.set("view", new Fudo.FriendView({ model: this }));
-
-		// Respond to things!
-		this.changeWindowTitle();
-		this.on("change:name", this.changeWindowTitle, this);
-		this.on("change:happiness", this.handleHappinessChange, this);
-		this.on("change:evil", this.handleEvilChange, this);
-		this.get("playground").on("resize", this.wallsMove, this);
 
 	},
 
@@ -72,18 +100,12 @@ Fudo.Friend = Fudo.Model.extend({
 		age: function() {
 			return Date.now() - this.get("birthday");
 		},
-		centerX: function() {
-			return ($(window).width() / 2);
-		},
-		centerY: function() {
-			return ($(window).height() / 2) + 200;
-		},
 	},
 
 	/*
 	 * When happiness is changed...
 	 */
-	handleHappinessChange: function() {
+	happinessChanged: function() {
 
 		// What's the previous happiness?
 		var previous = this.previous("happiness");
@@ -97,7 +119,7 @@ Fudo.Friend = Fudo.Model.extend({
 	/*
 	 * When evil is changed...
 	 */
-	handleEvilChange: function() {
+	evilChanged: function() {
 
 		// ENTER ＤＥＭＯＮ MODE
 		if (this.get("evil") >= 1) {
@@ -112,8 +134,8 @@ Fudo.Friend = Fudo.Model.extend({
 	enterDemonMode: function() {
 
 		// SHUT IT ALL UP, SCREAM ＤＥＭＯＮ
-		this.get("playground").get("music").volume = 0;
-		this.get("playground").get("music").src = "sounds/bgm_evil.ogg";
+		this.get("playground").get("music").pause();
+		this.get("playground").set("music", Fudo.playAudio("sounds/bgm_evil.ogg"));
 		Fudo.playAudio("sounds/demon_spoken.ogg");
 
 		// MOVE MOOD
@@ -157,7 +179,7 @@ Fudo.Friend = Fudo.Model.extend({
 		var now = Date.now();
 
 		// Should I be falling?
-		if (this.get("y") < this.get("centerY")) {
+		if (this.get("y") < Fudo.center.y()) {
 			this.set("accelerationY", .01);
 		} else {
 			this.set("accelerationY", 0);
@@ -229,8 +251,8 @@ Fudo.Friend = Fudo.Model.extend({
 	 * Move to the center.
 	 */
 	moveToCenter: function() {
-		this.set("x", this.get("centerX"));
-		this.set("y", this.get("centerY"));
+		this.set("x", Fudo.center.x());
+		this.set("y", Fudo.center.y());
 	},
 
 	/*
@@ -241,10 +263,10 @@ Fudo.Friend = Fudo.Model.extend({
 	},
 
 	/*
-	 * Hop!
+	 * Hop (if we can)!
 	 */
 	hop: function(amount) {
-		if (this.get("y") >= this.get("centerY")) {
+		if (this.get("y") >= Fudo.center.y()) {
 			this.set("velocityY", amount * -1);
 			this.trigger("hop");
 		}

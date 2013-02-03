@@ -29,6 +29,9 @@
 		// It's intentionally in the global namespace.
 		window.friend = new Fudo.Friend({ playground: playground });
 
+		// Preload some audio.
+		(new Audio()).src = "sounds/demon_spoken.ogg";
+
 		// Load the menus script.
 		var menuScript = document.createElement("script");
 		menuScript.src = "js/menus.js";

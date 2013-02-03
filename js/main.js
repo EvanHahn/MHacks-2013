@@ -23,7 +23,7 @@
 			location.href = "index.html";
 		window.friend = new Fudo.Friend({ playground: playground });
 
-		// Add the menu.
+		// Add the settings menu.
 		// $(".settings-menu").show();
 		$(".settings-menu input").on("change", function() {
 			var $this = $(this);

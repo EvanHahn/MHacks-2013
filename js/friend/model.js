@@ -251,7 +251,7 @@ Fudo.Friend = Fudo.Model.extend({
 
 			// Am I crying?
 			if (this.get("happiness") < -.9) {
-				Fudo.playAudio("sounds/waaaaa.ogg").volume = .3;
+				Fudo.playAudio("sounds/waaaaa.ogg").volume = .1;
 			}
 
 			// Randomly hop every once in awhile.
@@ -271,7 +271,7 @@ Fudo.Friend = Fudo.Model.extend({
 			}
 
 			// Equalize mood.
-			this.set("boredom", Fudo.approach(this.get("boredom"), 1.0, .001));
+			this.set("boredom", Fudo.approach(this.get("boredom"), 1, .001));
 			this.set("happiness", Fudo.approach(this.get("happiness"), .5, .001));
 			this.set("fear", Fudo.approach(this.get("fear"), -.5, .001));
 

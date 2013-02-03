@@ -4,6 +4,11 @@ function loadScript(src) {
 	document.head.appendChild(script);
 };
 
+function loadImage(src) {
+	var image = new Image;
+	image.src = src;
+};
+
 $(document).ready(function() {
 
 	// Do we already have a friend?
@@ -34,6 +39,10 @@ $(document).ready(function() {
 	var vendors = ["requestanimationframe", "moment", "rgbcolor", "kinetic", "lodash", "backbone", "backbone.mutators"];
 	vendors.forEach(function(name) {
 		loadScript("vendor/" + name + ".js");
+	});
+	var images = ["background1"];
+	images.forEach(function(name) {
+		loadScript("sprites/" + name + ".png");
 	});
 
 });

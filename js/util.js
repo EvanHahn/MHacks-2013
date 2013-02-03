@@ -36,3 +36,11 @@ Fudo.Image = function(src) {
 	result.src = src;
 	return result;
 };
+
+/*
+ * Random within a range.
+ */
+
+Fudo.randomRange = function(lower, upper) {
+	return Math.random() * (upper - lower) + lower;
+};

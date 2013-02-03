@@ -15,7 +15,6 @@ Fudo.Cupcake = Fudo.Food.extend({
 
 		else {
 			friend.set("happiness", -1);
-			friend.set("evil", Math.max(friend.get("evil") - .1, -1));
 		}
 
 	},

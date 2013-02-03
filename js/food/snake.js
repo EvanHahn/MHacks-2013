@@ -9,8 +9,9 @@ Fudo.Snake = Fudo.Food.extend({
 
 		if (friend.get("evil") < 1) {
 			friend.set("happiness", friend.get("happiness") - .3);
-			if (friend.get("evil") === -1) {
-				friend.set("evil", friend.get("evil") + .1);
+			var shouldFall = (friend.get("evil") === -1);
+			friend.set("evil", friend.get("evil") + .1);
+			if (shouldFall) {
 				friend.yChanged();
 			}
 		} else {

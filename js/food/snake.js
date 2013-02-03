@@ -8,15 +8,16 @@ Fudo.Snake = Fudo.Food.extend({
 	applyToFriend: function(friend) {
 
 		if (friend.get("evil") < 1) {
-			friend.set("happiness", Math.max(friend.get("happiness") - .3, -1));
-			friend.set("boredom", Math.max(friend.get("boredom") - .3, -1));
-			friend.set("evil", Math.min(friend.get("evil") + .1, 1));
+			friend.set("happiness", friend.get("happiness") - .3);
+			friend.set("boredom", friend.get("boredom") - .3);
+			friend.set("evil", friend.get("evil") + .1);
 		}
 
 		else {
 			friend.set("happiness", 1);
-			friend.set("evil", Math.min(friend.get("evil") + .1, 1));
+			friend.set("evil", friend.get("evil") + .1);
 		}
+		friend.set("hunger", friend.get("hunger") - .7);
 
 	},
 

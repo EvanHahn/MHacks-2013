@@ -154,6 +154,18 @@ Fudo.Friend = Fudo.Model.extend({
 	},
 
 	/*
+	 * When hunger is changed...
+	 */
+	hungerChanged: function() {
+		if (this.previous("hunger") >= 1) {
+			if (this.get("hunger") > .9) {
+				this.get("playground").set("music", Fudo.playAudio("sounds/hungry.ogg"));
+				//Implement speech bubble containing most desired food item based on normal, evil, or angel, etc.
+			}
+		}
+	},
+
+	/*
 	 * ＤＥＭＯＮﾠＭＯＤＥ
 	 */
 	enterDemonMode: function() {
@@ -265,6 +277,11 @@ Fudo.Friend = Fudo.Model.extend({
 				}
 			}
 
+			// Play hunger sound if you haven't eaten in awhile.
+			if (this.get("hunger") >= 0.9) {
+				Fudo.playAudio("sounds/hungry.ogg");
+			}
+
 			// Make the angle proper depending on tiredness.
 			if (this.get("tiredness") >= 1) {
 				this.set("angle", Math.PI / 2);
@@ -278,6 +295,7 @@ Fudo.Friend = Fudo.Model.extend({
 			this.set("boredom", Fudo.approach(this.get("boredom"), 1, .001));
 			this.set("happiness", Fudo.approach(this.get("happiness"), .5, .001));
 			this.set("fear", Fudo.approach(this.get("fear"), -.5, .001));
+			this.set("hunger", Fudo.approach(this.get("hunger"), 1, .0003));
 
 		}
 

@@ -26,7 +26,9 @@ Fudo.Playground = Backbone.Model.extend({
 		requestAnimationFrame(this.frame);
 
 		// Add the music.
-		this.set("music", Fudo.playAudio("sounds/bgm_1.ogg").loop = true);
+		var audio = Fudo.playAudio("sounds/bgm_1.ogg");
+		audio.loop = true;
+		this.set("music", audio);
 
 	},
 
@@ -37,9 +39,13 @@ Fudo.Playground = Backbone.Model.extend({
 
 		// Do the every-frame stuff for each model inside.
 		this.get("models").each(function(model) {
-			model.onFrame();
-			model.doPhysics();
-			model.get("view").render();
+			if (model) {
+				model.onFrame();
+				model.doPhysics();
+				model.get("view").render();
+			} else {
+				console.warn("Playground's models collection has a non-model: " + model);
+			}
 		});
 
 		// Go again!

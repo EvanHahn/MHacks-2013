@@ -50,6 +50,7 @@ Fudo.FriendView = Fudo.View.extend({
 			hornsDemonBig: Fudo.Image("sprites/hornsDemon3.png"),
 			hornsDemonMedium: Fudo.Image("sprites/hornsDemon2.png"),
 			hornsDemonSmall: Fudo.Image("sprites/hornsDemon1.png"),
+			speechBubble: Fudo.Image("sprites/speech.png"),
 		};
 
 		// Create the wings.
@@ -164,6 +165,21 @@ Fudo.FriendView = Fudo.View.extend({
 			}
 		});
 		this.group.add(this.mouthSprite);
+
+		// Create the speech bubble.
+		this.speechBubbleGroup = new Kinetic.Group;
+		this.speechBubbleSprite = new Kinetic.Image({
+			image: this.images.speechBubble,
+			x: 0, y: 0,
+			width: 200,
+			height: 200,
+			offset: {
+				x: 50,
+				y: 190
+			}
+		});
+		this.speechBubbleGroup.add(this.speechBubbleSprite);
+		this.layer.add(this.speechBubbleGroup);
 
 		// Bind some events to some sounds.
 		this.model.on("hop", function() {
@@ -311,6 +327,10 @@ Fudo.FriendView = Fudo.View.extend({
 		this.group.setX(this.model.get("x") - xShift);
 		this.group.setY(this.model.get("y") + yShift);
 		this.group.setRotation(this.model.get("angle") + angleShift);
+
+		// Draw the speech bubble.
+		this.speechBubbleGroup.setX(this.model.get("x") + 100);
+		this.speechBubbleGroup.setY(this.model.get("y") - 200 + Math.sin(Date.now() / 500) * 10);
 
 		// Draw!
 		this.layer.draw();

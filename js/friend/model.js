@@ -37,13 +37,13 @@ Fudo.Friend = Fudo.Model.extend({
 		// Fetch stuff.
 		this.fetch();
 
-		// More initial properties, based on other stuff.
-		if (this.get("evil") >= 1)
-			this.enterDemonMode();
-
 		// If we're totally new, do the first initialize.
 		if (this.get("isNew") !== false)
 			this.firstInitialize();
+
+		// More initial properties, based on other stuff.
+		if ((this.get("evil") >= 1) || (this.get("name") == "666"))
+			this.enterDemonMode();
 
 		// Build a view.
 		this.set("view", new Fudo.FriendView({ model: this }));
@@ -131,6 +131,11 @@ Fudo.Friend = Fudo.Model.extend({
 		this.get("playground").get("music").volume = 0;
 		Fudo.playAudio("sounds/demon_spoken.ogg");
 
+		// MOVE MOOD
+		this.set("evil", 1);
+		this.set("happiness", 1);
+		this.set("boredom", 0);
+
 		// WELCOME TO HELL
 		$(document.body).hide();
 		$(document.documentElement).css({ background: "#000" });
@@ -213,6 +218,16 @@ Fudo.Friend = Fudo.Model.extend({
 			if (this.get("happiness") < -.9) {
 				Fudo.playAudio("sounds/waaaaa.ogg").volume = .3;
 			}
+
+			// Randomly hop every once in awhile.
+			if (Math.random() < .001) {
+				this.hop((Math.random() * 2) + 1);
+			}
+
+			// Equalize mood.
+			this.set("boredom", Fudo.approach(this.get("boredom"), 0, .001));
+			this.set("happiness", Fudo.approach(this.get("happiness"), .5, .001));
+			this.set("fear", Fudo.approach(this.get("fear"), -.5, .001));
 
 		}
 

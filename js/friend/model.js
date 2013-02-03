@@ -4,7 +4,6 @@ Fudo.Friend = Fudo.Model.extend({
 	 * List the properties that need syncing.
 	 */
 	TO_SYNC: [
-		"isNew",
 		"name",
 		"birthday",
 		"happiness",
@@ -14,6 +13,21 @@ Fudo.Friend = Fudo.Model.extend({
 		"boredom",
 		"evil",
 	],
+
+	/*
+	 * Default properties.
+	 */
+	defaults: function() {
+		return {
+			birthday: Date.now(),
+			happiness: .5,
+			tiredness: 1,
+			boredom: Fudo.randomRange(-1, 1),
+			fear: -1,
+			evil: 0,
+			state: "idle",
+		};
+	},
 
 	/*
 	 * Construct a friend.
@@ -31,15 +45,9 @@ Fudo.Friend = Fudo.Model.extend({
 		// Set up some initial properties.
 		this.set("x", this.get("centerX"));
 		this.set("y", -500);
-		this.set("eyeDirection", 0);
-		this.set("state", "idle");
 
 		// Fetch stuff.
 		this.fetch();
-
-		// If we're totally new, do the first initialize.
-		if (this.get("isNew") !== false)
-			this.firstInitialize();
 
 		// More initial properties, based on other stuff.
 		if ((this.get("evil") >= 1) || (this.get("name") == "666"))
@@ -55,21 +63,6 @@ Fudo.Friend = Fudo.Model.extend({
 		this.on("change:evil", this.handleEvilChange, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 
-	},
-
-	/*
-	 * If we're totally new, this function gets called.
-	 */
-	firstInitialize: function() {
-		this.set("birthday", Date.now());
-		this.set("happiness", .5);
-		this.set("tiredness", -1);
-		this.set("surprise", 0.1);
-		this.set("boredom", Fudo.randomRange(-1, 1));
-		this.set("fear", -1);
-		this.set("evil", 0);
-		this.set("isNew", false);
-		this.sync();
 	},
 
 	/*

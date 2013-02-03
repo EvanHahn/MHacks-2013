@@ -35,7 +35,7 @@ $(document).ready(function() {
 		$("#name").attr("disabled", true);
 		localStorage.setItem("friend", JSON.stringify({
 			name: name,
-			isNew: true
+			updatedAt: Date.now()
 		}));
 		location.href = "playground.html";
 		return false;

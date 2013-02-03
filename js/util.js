@@ -50,9 +50,7 @@ Fudo.randomRange = function(lower, upper) {
  */
 
 Fudo.approach = function(start, finish, amount) {
-
 	amount = Math.abs(amount);
-
 	if (start < finish) {
 		start += amount;
 		if (start > finish)
@@ -62,9 +60,7 @@ Fudo.approach = function(start, finish, amount) {
 		if (start < finish)
 			start = finish;
 	}
-
 	return start;
-
 };
 
 /*

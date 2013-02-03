@@ -214,8 +214,6 @@ Fudo.Friend = Fudo.Model.extend({
 				Fudo.playAudio("sounds/waaaaa.ogg").volume = .3;
 			}
 
-			// If a demon, scream
-
 		}
 
 	},

@@ -9,3 +9,4 @@ Fudo loves the following libraries:
 * [Backbone.js](http://backbonejs.org/), version 0.9.10, MIT License
 * [Backbone.Mutators](http://asciidisco.github.com/Backbone.Mutators), version 0.3.0, MIT License
 * [Stream Noise Sound](http://soundbible.com/1434-Stream-Noise.html), Creative Commons Attribution 3.0 (US)
+* [Stream Noise Sound](http://soundbible.com/1571-Fishtank-Bubbles-2.html), Creative Commons Attribution 3.0 (US)

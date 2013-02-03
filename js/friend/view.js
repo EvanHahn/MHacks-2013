@@ -57,6 +57,7 @@ Fudo.FriendView = Fudo.View.extend({
 			hornsDemonBig: Fudo.Image("sprites/hornsDemon3.png"),
 			hornsDemonMedium: Fudo.Image("sprites/hornsDemon2.png"),
 			hornsDemonSmall: Fudo.Image("sprites/hornsDemon1.png"),
+			halo: Fudo.Image("sprites/halo.png"),
 			speechBubble: Fudo.Image("sprites/speech.png"),
 			speechHungry: Fudo.Image("sprites/cupcake_small.png"),
 			speechSnake: Fudo.Image("sprites/snake_small.png"),
@@ -175,6 +176,20 @@ Fudo.FriendView = Fudo.View.extend({
 			}
 		});
 		this.group.add(this.mouthSprite);
+		
+		// Create the halo.
+		this.haloSprite = new Kinetic.Image({
+			image: this.images.halo,
+			x: 20,
+			y: -330,
+			width: 150,
+			height: 100,
+			offset: {
+				x: 150 / 2,
+				y: 100 / 2
+			}
+		});
+		this.group.add(this.haloSprite);
 
 		// Create the speech bubble.
 		this.speechBubbleGroup = new Kinetic.Group;
@@ -345,6 +360,12 @@ Fudo.FriendView = Fudo.View.extend({
 			this.rightEyeSprite.setImage(this.images.eyeSparkle);
 			this.leftEyebrowSprite.setImage(this.images.eyebrowLeftMad);
 			this.rightEyebrowSprite.setImage(this.images.eyebrowRightMad);
+		}
+		if (this.model.get("evil") > -1) {
+			this.haloSprite.setVisible(false);
+		} else {
+			this.haloSprite.setVisible(true);
+			this.haloSprite.setImage(this.images.halo);
 		}
 		if (this.model.get("evil") > .8) {
 			this.leftWingSprite.setImage(this.images.wingsLeftDemonBig);

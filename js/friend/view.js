@@ -59,7 +59,7 @@ Fudo.FriendView = Fudo.View.extend({
 			hornsDemonSmall: Fudo.Image("sprites/hornsDemon1.png"),
 			speechBubble: Fudo.Image("sprites/speech.png"),
 			speechHungry: Fudo.Image("sprites/cupcake_small.png"),
-			speechHungry: Fudo.Image("sprites/snake_small.png"),
+			speechSnake: Fudo.Image("sprites/snake_small.png"),
 			speechLove: Fudo.Image("sprites/heart.png"),
 		};
 
@@ -410,10 +410,11 @@ Fudo.FriendView = Fudo.View.extend({
 			this.speechBubbleGroup.setX(this.model.get("x") + 100);
 			this.speechBubbleGroup.setY(this.model.get("y") - 200 + Math.sin(Date.now() / 500) * 10);
 			if (this.model.get("message") == "hungry") {
-				if (this.model.get("evil") < 1)
-					this.speechBubbleIconSprite.setImage(this.images.speechHungry);
-				else
+				if (this.model.get("evil") == 1) {
 					this.speechBubbleIconSprite.setImage(this.images.speechSnake);
+				} else {
+					this.speechBubbleIconSprite.setImage(this.images.speechHungry);
+				}
 			} else if (this.model.get("message") == "love") {
 				this.speechBubbleIconSprite.setImage(this.images.speechLove);
 			}

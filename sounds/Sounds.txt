@@ -17,3 +17,7 @@ waaaaa
 devil_wings
 angel_wings
 no_pout
+hiss
+bite_gulp
+bgm_1
+bgm_evil

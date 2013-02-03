@@ -65,3 +65,8 @@ html, body {
 .supported .food-menu.active .activate-button {
 	display: none;
 }
+
+.supported .food-menu.active {
+	background-color: rgba(0,0,0, 0.5);
+	border-radius: 15px;
+}

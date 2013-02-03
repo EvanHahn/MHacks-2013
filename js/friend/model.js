@@ -271,7 +271,7 @@ Fudo.Friend = Fudo.Model.extend({
 			}
 
 			// Equalize mood.
-			this.set("boredom", Fudo.approach(this.get("boredom"), 0, .001));
+			this.set("boredom", Fudo.approach(this.get("boredom"), 1.5, .001));
 			this.set("happiness", Fudo.approach(this.get("happiness"), .5, .001));
 			this.set("fear", Fudo.approach(this.get("fear"), -.5, .001));
 

@@ -35,8 +35,8 @@ Fudo.FoodView = Fudo.View.extend({
 	 * Draw the sprite.
 	 */
 	render: function() {
-		this.group.setX(this.model.get("coords")[0]);
-		this.group.setY(this.model.get("coords")[1]);
+		this.group.setX(this.model.get("x"));
+		this.group.setY(this.model.get("y"));
 		this.group.setRotation(this.model.get("angle"));
 		this.layer.draw();
 	}

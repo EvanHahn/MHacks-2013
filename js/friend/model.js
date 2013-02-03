@@ -29,7 +29,8 @@ Fudo.Friend = Fudo.Model.extend({
 		}, this);
 
 		// Set up some initial properties.
-		this.set("coords", [this.get("centerX"), -500, 0]);
+		this.set("x", this.get("centerX"));
+		this.set("y", -500);
 		this.set("eyeDirection", 0);
 		this.set("state", "idle");
 
@@ -163,11 +164,11 @@ Fudo.Friend = Fudo.Model.extend({
 		var now = Date.now();
 
 		// Should I be falling?
-		if (this.get("coords")[1] < this.get("centerY")) {
-			this.set("acceleration", [0, .01, 0]);
+		if (this.get("y") < this.get("centerY")) {
+			this.set("accelerationY", .01);
 		} else {
-			this.set("acceleration", [0, 0, 0]);
-			this.set("velocity", [0, 0, 0]);
+			this.set("accelerationY", 0);
+			this.set("velocityY", 0);
 		}
 
 		// Idle state.
@@ -235,11 +236,8 @@ Fudo.Friend = Fudo.Model.extend({
 	 * Move to the center.
 	 */
 	moveToCenter: function() {
-		this.set("coords", [
-			$(window).width() / 2,
-			($(window).height() / 2) + 200,
-			0
-		]);
+		this.set("x", this.get("centerX"));
+		this.set("y", this.get("centerY"));
 	},
 
 	/*
@@ -253,8 +251,8 @@ Fudo.Friend = Fudo.Model.extend({
 	 * Hop!
 	 */
 	hop: function(amount) {
-		if (this.get("coords")[1] >= this.get("centerY")) {
-			this.set("velocity", [0, amount * -1, 0]);
+		if (this.get("y") >= this.get("centerY")) {
+			this.set("velocityY", amount * -1);
 			this.trigger("hop");
 		}
 	},

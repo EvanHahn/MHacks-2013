@@ -1,16 +1,24 @@
 Fudo.Food = Fudo.Model.extend({
 
+	/*
+	 * Constructor.
+	 */
 	initialize: function() {
 		Fudo.Model.prototype.initialize.apply(this, arguments);
-		this.set("coords", [friend.get("centerX"), -100, 0]);
-		this.set("acceleration", [0, .001, 0]);
-		this.on("change:coords", this.checkCollision, this);
+		this.set("x", friend.get("x"));
+		this.set("y", -100);
+		this.set("accelerationY", .001);
+		this.on("change:y", this.checkCollision, this);
 	},
 
+	/*
+	 * If we reach the friend's mouth, feed it!
+	 */
 	checkCollision: function() {
-		if (this.get("coords")[1] > (friend.get("centerY") - 200))
+		if (this.get("y") > (friend.get("y") - 200)) {
 			this.remove();
-		this.applyToFriend(friend);
+			this.applyToFriend(friend);
+		}
 	},
 
 });

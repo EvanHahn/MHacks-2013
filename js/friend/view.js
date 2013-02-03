@@ -247,8 +247,8 @@ Fudo.FriendView = Fudo.View.extend({
 		this.shadowSprite.setY(this.model.get("centerY"));
 
 		// Place the group, and unrotate the shadow.
-		this.group.setX(this.model.get("coords")[0] - xShift);
-		this.group.setY(this.model.get("coords")[1] + yShift);
+		this.group.setX(this.model.get("x") - xShift);
+		this.group.setY(this.model.get("y") + yShift);
 		this.group.setRotation(this.model.get("angle") + angleShift);
 		this.shadowSprite.setRotation(-this.model.get("angle"));
 

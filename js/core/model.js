@@ -17,9 +17,12 @@ Fudo.Model = Backbone.Model.extend({
 		// These are per MILLISECOND.
 		// Angles are in RADIANS.
 		this.set({
-			coords: [0, 0, 0],
-			velocity: [0, 0, 0],
-			acceleration: [0, 0, 0],
+			x: 0,
+			y: 0,
+			velocityX: 0,
+			velocityY: 0,
+			accelerationX: 0,
+			accelerationY: 0,
 			angle: 0,
 			angularVelocity: 0,
 			angularAcceleration: 0,
@@ -48,17 +51,15 @@ Fudo.Model = Backbone.Model.extend({
 		// Apply acceleration.
 		this.set({
 			angularVelocity: this.get("angularVelocity") + this.get("angularAcceleration") * delta,
-			velocity: _(this.get("acceleration")).map(function(a, i) {
-				return this.get("velocity")[i] + (a * delta);
-			}, this),
+			velocityX: this.get("velocityX") + this.get("accelerationX") * delta,
+			velocityY: this.get("velocityY") + this.get("accelerationY") * delta,
 		});
 
 		// Apply velocity.
 		this.set({
 			angle: this.get("angle") + this.get("angularVelocity") * delta,
-			coords: _(this.get("velocity")).map(function(v, i) {
-				return this.get("coords")[i] + (v * delta);
-			}, this),
+			x: this.get("x") + this.get("velocityX") * delta,
+			y: this.get("y") + this.get("velocityY") * delta,
 		});
 
 		// Physics complete!

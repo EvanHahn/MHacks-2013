@@ -35,14 +35,4 @@ $(document).ready(function() {
 		return false;
 	});
 
-	// While we wait, load the vendor libraries and the images.
-	var vendors = ["requestanimationframe", "kinetic", "lodash", "backbone", "backbone.accessors"];
-	vendors.forEach(function(name) {
-		loadScript("vendor/" + name + ".js");
-	});
-	var images = ["background1"];
-	images.forEach(function(name) {
-		loadImage("sprites/" + name + ".png");
-	});
-
 });

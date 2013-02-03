@@ -24,7 +24,7 @@
 		window.friend = new Fudo.Friend({ playground: playground });
 
 		// Add the settings menu.
-		$(".settings-menu").show();
+		// $(".settings-menu").show();
 		$(".settings-menu input").on("change", function() {
 			var $this = $(this);
 			var val = parseFloat($this.val());

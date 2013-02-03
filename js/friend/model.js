@@ -12,6 +12,7 @@ Fudo.Friend = Fudo.Model.extend({
 		"fear",
 		"boredom",
 		"evil",
+		"hunger",
 	],
 
 	/*
@@ -24,6 +25,7 @@ Fudo.Friend = Fudo.Model.extend({
 		"fear",
 		"boredom",
 		"evil",
+		"hunger",
 	],
 
 	/*
@@ -37,6 +39,7 @@ Fudo.Friend = Fudo.Model.extend({
 			boredom: Fudo.randomRange(-1, 1),
 			fear: -1,
 			evil: 0,
+			hunger: 0,
 			state: "idle",
 		};
 	},
@@ -74,6 +77,7 @@ Fudo.Friend = Fudo.Model.extend({
 		this.on("change:happiness", this.happinessChanged, this);
 		this.on("change:evil", this.evilChanged, this);
 		this.on("change:tiredness", this.tirednessChanged, this);
+		this.on("change:hunger", this.hungerChanged, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 
 		// Don't let bounded properties get too large.

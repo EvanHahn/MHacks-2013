@@ -17,7 +17,7 @@ $(".settings-menu .kill").on("click", function() {
  * Food menu
  */
 $(".food-menu .activate-button").on("click", function() {
-	$(".food-menu").toggleClass("active");
+	$(".food-menu").addClass("active");
 	return false;
 });
 $(".food-button").on("click", function() {
@@ -27,4 +27,5 @@ $(".food-button").on("click", function() {
 	} else if (type == "snake") {
 		new Fudo.Snake({ playground: playground });
 	}
+	$(".food-menu").removeClass("active");
 });

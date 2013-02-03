@@ -43,7 +43,37 @@ Fudo.FriendView = Fudo.View.extend({
 			mouthSadderOpen: Fudo.Image("sprites/mouthSadderOpen.png"),
 			mouthTeeth: Fudo.Image("sprites/mouthTeeth.png"),
 			mouthHappierOpenDemon: Fudo.Image("sprites/mouthHappierOpen_D.png"),
+			wingsLeftDemonSmall: Fudo.Image("sprites/wingsDemon1_l.png"),
+			wingsRightDemonSmall: Fudo.Image("sprites/wingsDemon1_r.png"),
+			wingsLeftDemonBig: Fudo.Image("sprites/wingsDemon2_l.png"),
+			wingsRightDemonBig: Fudo.Image("sprites/wingsDemon2_r.png"),
 		};
+
+		// Create the wings.
+		this.leftWingSprite = new Kinetic.Image({
+			image: this.images.wingsLeftDemonSmall,
+			x: -90,
+			y: -190,
+			width: 158,
+			height: 158,
+			offset: {
+				x: 151,
+				y: 125,
+			}
+		});
+		this.group.add(this.leftWingSprite);
+		this.rightWingSprite = new Kinetic.Image({
+			image: this.images.wingsRightDemonSmall,
+			x: 90,
+			y: -190,
+			width: 158,
+			height: 158,
+			offset: {
+				x: 8,
+				y: 125,
+			}
+		});
+		this.group.add(this.rightWingSprite);
 
 		// Create the body sprite.
 		this.bodySprite = new Kinetic.Image({
@@ -222,13 +252,25 @@ Fudo.FriendView = Fudo.View.extend({
 			this.model.get("playground").get("music").volume = .3;
 		}
 
-		// Crazy demon mode.
+		// Change stuff based on evil mode.
 		if (this.model.get("evil") >= 1) {
 			this.mouthSprite.setImage(this.images.mouthHappierOpenDemon);
 			this.leftEyeSprite.setImage(this.images.eyeSparkle);
 			this.rightEyeSprite.setImage(this.images.eyeSparkle);
 			this.leftEyebrowSprite.setImage(this.images.eyebrowLeftMad);
 			this.rightEyebrowSprite.setImage(this.images.eyebrowRightMad);
+		}
+		this.leftWingSprite.setVisible(true);
+		this.rightWingSprite.setVisible(true);
+		if (this.model.get("evil") > .8) {
+			this.leftWingSprite.setImage(this.images.wingsLeftDemonBig);
+			this.rightWingSprite.setImage(this.images.wingsRightDemonBig);
+		} else if (this.model.get("evil") > .4) {
+			this.leftWingSprite.setImage(this.images.wingsLeftDemonSmall);
+			this.rightWingSprite.setImage(this.images.wingsRightDemonSmall);
+		} else {
+			this.leftWingSprite.setVisible(false);
+			this.rightWingSprite.setVisible(false);
 		}
 
 		// Change size based on age.

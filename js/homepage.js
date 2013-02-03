@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 	// When we click on the start button, ask for some stuff.
 	$(".start").on("click", function() {
-		$(".modal").show();
+		$(".modal").fadeIn(100);
 		$("#name").focus();
 		return false;
 	});

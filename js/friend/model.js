@@ -159,7 +159,7 @@ Fudo.Friend = Fudo.Model.extend({
 	hungerChanged: function() {
 		if (this.previous("hunger") >= 1) {
 			if (this.get("hunger") > .9) {
-				this.get("playground").set("music", Fudo.playAudio("sounds/hungry.ogg"));
+				this.get("playground").set("music", Fudo.playAudio("sounds/hungry.ogg").volume = 0.3);
 				//Implement speech bubble containing most desired food item based on normal, evil, or angel, etc.
 			}
 		}
@@ -279,7 +279,7 @@ Fudo.Friend = Fudo.Model.extend({
 
 			// Play hunger sound if you haven't eaten in awhile.
 			if (this.get("hunger") >= 0.9) {
-				Fudo.playAudio("sounds/hungry.ogg");
+				Fudo.playAudio("sounds/hungry.ogg").volume = 0.3;
 			}
 
 			// Make the angle proper depending on tiredness.

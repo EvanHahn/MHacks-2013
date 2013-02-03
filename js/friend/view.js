@@ -214,6 +214,8 @@ Fudo.FriendView = Fudo.View.extend({
 	 */
 	render: function() {
 
+		var now = Date.now();
+
 		// Add some variables for shifting.
 		var xShift = 0;
 		var yShift = 0;
@@ -349,8 +351,13 @@ Fudo.FriendView = Fudo.View.extend({
 		}
 
 		// Rotate wings.
-		this.leftWingSprite.setRotation(Math.cos(Date.now() / 600) * .5);
-		this.rightWingSprite.setRotation(Math.sin(Date.now() / 600) * .5);
+		if (Math.abs(this.model.get("evil") < 1)) {
+			this.leftWingSprite.setRotation(Math.cos(now / 600) * .5);
+			this.rightWingSprite.setRotation(Math.sin(now / 600) * .5);
+		} else {
+			this.leftWingSprite.setRotation(-Math.sin(now / 300) * .85);
+			this.rightWingSprite.setRotation(Math.sin(now / 300) * .85);
+		}
 
 		// Change size based on age.
 		var scale = Math.max(Math.min(1, this.model.get("age") / 300000), .5);

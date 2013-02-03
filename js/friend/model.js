@@ -219,7 +219,11 @@ Fudo.Friend = Fudo.Model.extend({
 
 		// Should I be falling?
 		if (this.get("y") < Fudo.center.y()) {
-			this.set("accelerationY", .01);
+			if (Math.abs(this.get("evil")) >= 1) {
+				this.set("accelerationY", 0);
+			} else {
+				this.set("accelerationY", .01);
+			}
 		} else {
 			this.set("y", Fudo.center.y());
 			this.set("accelerationY", 0);
@@ -251,7 +255,7 @@ Fudo.Friend = Fudo.Model.extend({
 						this.set("angle", Math.sin(now / 500) / 25);
 					}
 				} else {
-					this.set("angle", Math.sin(now / 100) / 25);
+					this.set("angle", Math.sin(now / 500) / 6);
 				}
 
 			} else if (this.get("tiredness") < .8) {
@@ -284,6 +288,11 @@ Fudo.Friend = Fudo.Model.extend({
 				if (Math.random() < .001) {
 					this.hop((Math.random() * 2) + 1);
 				}
+			}
+
+			// If we have full wings, fly!
+			if (Math.abs(this.get("evil")) >= 1) {
+				this.set("y", (Math.sin((now / 300) + Math.PI) * 50) + Fudo.center.y() - 100);
 			}
 
 			// Play hunger sound if you haven't eaten in awhile.

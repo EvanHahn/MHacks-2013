@@ -6,7 +6,6 @@ Fudo.Friend = Fudo.Model.extend({
 	TO_SYNC: [
 		"isNew",
 		"name",
-		"species",
 		"birthday",
 		"happiness",
 		"tiredness",

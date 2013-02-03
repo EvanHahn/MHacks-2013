@@ -46,3 +46,18 @@ html, body {
 .supported .settings-menu label {
 	text-transform: lowercase;
 }
+
+.supported .food-menu {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	z-index: 1;
+}
+
+.supported .food-menu .if-active { display: none; }
+.supported .food-menu.active .if-active { display: block; }
+
+.supported .food-menu .activate-button img {
+	width: 64px;
+	height: 64px;
+}

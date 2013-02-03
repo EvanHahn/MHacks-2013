@@ -31,9 +31,11 @@ Fudo.Model = Backbone.Model.extend({
 	},
 
 	/*
-	 * Overridable onframe.
+	 * Overridable methods.
 	 */
 	onFrame: Fudo.noop,
+	fetch: Fudo.noop,
+	sync: Fudo.noop,
 
 	/*
 	 * Do physics calculations.
@@ -62,6 +64,14 @@ Fudo.Model = Backbone.Model.extend({
 		// Physics complete!
 		this.set("lastPhysics", new Date);
 
+	},
+
+	/*
+	 * Remove me from the playground.
+	 */
+	remove: function() {
+		this.get("playground").get("models").remove(this);
+		this.get("view").layer.remove();
 	},
 
 });

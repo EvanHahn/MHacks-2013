@@ -33,6 +33,7 @@ Fudo.FriendView = Fudo.View.extend({
 			eyebrowRightMad: Fudo.Image("sprites/ebMad_r.png"),
 			eyeBlink: Fudo.Image("sprites/blink.png"),
 			eyeMidBlink: Fudo.Image("sprites/midblink.png"),
+			eyeClosed: Fudo.Image("sprites/eyeClosed.png"),
 			mouthHappierOpen: Fudo.Image("sprites/mouthHappierOpen.png"),
 			mouthHappyOpen: Fudo.Image("sprites/mouthHappyOpen.png"),
 			mouthHappyClosed: Fudo.Image("sprites/mouthHappyClosed.png"),
@@ -209,6 +210,16 @@ Fudo.FriendView = Fudo.View.extend({
 		}
 		if (this.model.get("fear") > .9) {
 			Fudo.playAudio("sounds/fear_rattle.ogg");
+		}
+
+		// Are we asleep?
+		if (this.model.get("tiredness") >= 1) {
+			this.leftEyeSprite.setImage(this.images.eyeClosed);
+			this.rightEyeSprite.setImage(this.images.eyeClosed);
+			if (Math.floor(Date.now() / 1000) % 1000) {
+				Fudo.playAudio("sounds/sigh.ogg");
+			}
+			this.model.get("playground").get("music").volume = .3;
 		}
 
 		// Crazy demon mode.

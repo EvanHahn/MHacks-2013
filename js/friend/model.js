@@ -53,11 +53,18 @@ Fudo.Friend = Fudo.Model.extend({
 		this.fetch();
 
 		// Set up some initial properties.
-		this.set("x", Fudo.center.x());
-		this.set("y", -500);
+		this.moveToCenter();
 		this.changeWindowTitle();
 		if (this.get("name") == "666")
 			this.set("evil", 1);
+		if (this.get("tiredness") >= 1) {
+			setTimeout(_(function() {
+				this.set("tiredness", .9);
+			}).bind(this), 3000);
+			setTimeout(_(function() {
+				this.set("tiredness", 0);
+			}).bind(this), 6000);
+		}
 
 		// More initial properties, based on other stuff.
 		if (this.get("evil") >= 1)
@@ -66,6 +73,7 @@ Fudo.Friend = Fudo.Model.extend({
 		// Respond to things.
 		this.on("change:happiness", this.happinessChanged, this);
 		this.on("change:evil", this.evilChanged, this);
+		this.on("change:tiredness", this.tirednessChanged, this);
 		this.get("playground").on("resize", this.wallsMove, this);
 
 		// Don't let bounded properties get too large.
@@ -90,6 +98,7 @@ Fudo.Friend = Fudo.Model.extend({
 
 		// Set up the view.
 		this.set("view", new Fudo.FriendView({ model: this }));
+
 
 	},
 
@@ -126,6 +135,18 @@ Fudo.Friend = Fudo.Model.extend({
 			this.enterDemonMode();
 		}
 
+	},
+
+	/*
+	 * When tiredness is changed...
+	 */
+	tirednessChanged: function() {
+		if (this.previous("tiredness") >= 1) {
+			if (this.get("tiredness") > .8) {
+				this.set("angularVelocity", .001);
+				this.set("angularAcceleration", -.000001);
+			}
+		}
 	},
 
 	/*
@@ -190,7 +211,7 @@ Fudo.Friend = Fudo.Model.extend({
 		if (this.get("state") == "idle") {
 
 			// Wobble!
-			if (this.get("fear") < .5) {
+			if ((this.get("fear") < .5) && (this.get("tiredness") < .8)) {
 
 				if (this.get("evil") < 1) {
 					if (this.get("boredom") > .5) {
@@ -205,8 +226,12 @@ Fudo.Friend = Fudo.Model.extend({
 					this.set("angle", Math.sin(now / 100) / 25);
 				}
 
-			} else {
-				this.set("angle", 0);
+			} else if (this.get("tiredness") < .8) {
+				this.set({
+					angle: 0,
+					angularVelocity: 0,
+					angularAcceleration: 0,
+				});
 			}
 
 			// Should I be blinking?
@@ -227,8 +252,19 @@ Fudo.Friend = Fudo.Model.extend({
 			}
 
 			// Randomly hop every once in awhile.
-			if (Math.random() < .001) {
-				this.hop((Math.random() * 2) + 1);
+			if (this.get("tiredness") < 1) {
+				if (Math.random() < .001) {
+					this.hop((Math.random() * 2) + 1);
+				}
+			}
+
+			// Make the angle proper depending on tiredness.
+			if (this.get("tiredness") >= 1) {
+				this.set("angle", Math.PI / 2);
+			}
+			if ((this.get("tiredness") >= 1) || (this.get("tiredness") < .8)) {
+				this.set("angularVelocity", 0);
+				this.set("angularAcceleration", 0);
 			}
 
 			// Equalize mood.

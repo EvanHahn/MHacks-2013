@@ -16,7 +16,6 @@ function loadImage(src) {
 };
 
 $(document).ready(function() {
-
 	// Do we already have a friend?
 	if (localStorage.getItem("friend")) {
 		location.href = "playground.html";
@@ -40,15 +39,4 @@ $(document).ready(function() {
 		location.href = "playground.html";
 		return false;
 	});
-
-	// While we wait, load the vendor libraries and the images.
-	var vendors = ["requestanimationframe", "kinetic", "lodash", "backbone", "backbone.accessors"];
-	vendors.forEach(function(name) {
-		loadScript("vendor/" + name + ".js");
-	});
-	var images = ["background1", "background_demon", "background_angel", "cupcake_small", "heart", "speech", "snake_small"];
-	images.forEach(function(name) {
-		loadImage("sprites/" + name + ".png");
-	});
-
 });

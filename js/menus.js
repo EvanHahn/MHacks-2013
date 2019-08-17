@@ -33,4 +33,12 @@ $(".food-button").on("click", function() {
 	}
 	Fudo.playAudio("sounds/poke2.ogg");
 	$(".food-menu").removeClass("active");
+
+	// Start the background music. We can't do this at the start
+	// because of browser autoplay restrictions.
+	if (!window.playground.get("music")) {
+		var audio = Fudo.playAudio("sounds/bgm_1.ogg");
+		audio.loop = true;
+		window.playground.set("music", audio);
+	}
 });

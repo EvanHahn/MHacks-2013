@@ -128,8 +128,12 @@ Fudo.Friend = Fudo.Model.extend({
 		var previous = this.previous("happiness");
 
 		// Quiet the music if I'm really sad.
-		if (this.get("evil") < 1)
-			this.get("playground").get("music").volume = (this.get("happiness") + 1) / 2;
+		if (this.get("evil") < 1) {
+			var music = this.get("playground").get("music");
+			if (music) {
+				music.volume = (this.get("happiness") + 1) / 2;
+			}
+		}
 
 	},
 
